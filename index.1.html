@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+</head>
+<style>
+    #productsDiv div {
+        width: 200px;
+        height: 200px;
+        border: 1 px solid black;
+        margin: 1 px;
+        display: inline-block;
+        transition: background - color 0.5 s ease - in -out;
+        cursor: pointer;
+    }
+</style>
+
+<body>
+
+
+
+
+    <div class="container">
+        <h1 id="header" align="center">Seeing something you love?</h1>
+
+        <div class="col-xs-12" id="productsDiv">
+
+            <div id="card">
+
+                <img src={products.image.img}/>
+            </div>
+            <div id="card">
+
+            </div>
+
+            <div id="card">
+
+            </div>
+
+            <div id="card">
+
+            </div>
+
+            <div id="card">
+
+            </div>
+
+            <div id="card">
+
+            </div>
+
+            <div id="card">
+
+            </div>
+            <div id="card">
+
+            </div>
+            <div id="card">
+
+            </div>
+            <div id="card">
+
+            </div>
+            <div id="card">
+
+            </div>
+
+            <script>
+                var products = [
+
+                    {
+                        name: "Bikini Top",
+                        price: 500,
+                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                        image: {
+                            img: "b4.jpg"
+                        }
+
+                    },
+
+                    {
+                        name: "Bikini Bottom",
+                        price: 500,
+                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                        image: {
+                            img: "b4.jpg"
+                        }
+
+                    }, {
+                        name: "Bikini Full Set",
+                        price: 500,
+                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                        image: {
+                            img: "b4.jpg"
+                        }
+                    },
+
+                    {
+                        name: "Bikini Set",
+                        price: 500,
+                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                        image: {
+                            img: "b4.jpg"
+                        }
+
+                    }, {
+                        name: "Bikini Top",
+                        price: 500,
+                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                        image: {
+                            img: "b4.jpg"
+                        }
+
+                    },
+
+                    {
+                        name: "Bikini Bottom",
+                        price: 500,
+                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                        image: {
+                            img: "b4.jpg"
+                        }
+                    }, {
+
+                        name: "Bikini Full Set",
+                        price: 500,
+                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                        image: {
+                            img: "b4.jpg"
+                        }
+                    },
+
+                    {
+
+                        name: "Bikini Set",
+                        price: 500,
+                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                        image: {
+                            img: "b4.jpg"
+                        }
+                    },
+                    {
+
+                        name: "Bikini Set",
+                        price: 500,
+                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                        image: {
+                            img: "b4.jpg"
+                        }
+                    },
+                    {
+
+                        name: "Bikini Set",
+                        price: 500,
+                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                        image: {
+                            img: "b4.jpg"
+                        }
+
+                    }
+                ];
+
+
+                let cards = document.querySelectorAll("div > #card");
+
+                cards.innerHTML = "hey";
+
+                for (var i in products) {
+
+                    cards[i].innerHTML = products[i].name + ", " + "Price: " + products[i].price + ", " +
+                        products[i].description;
+
+
+                };
+            </script>
+
+
+
+        </div>
+
+
+        <div class="col-xs-12" id="checkoutDiv">
+
+
+            <form action="#" method="post" class="form-horizontal">
+                <div class="form-group">
+                    <label for="input-1" class="control-label col-xs-2">Name</label>
+                    <div class="col-xs-4">
+                        <input class="form-control" type="text" />
+                    </div>
+                    <label for="input-2" class="control-label col-xs-2">Email</label>
+                    <div class="col-xs-4">
+                        <input class="form-control" type="text" />
+                    </div>
+                </div>
+            </form>
+
+            <form action="#" method="post" class="form-horizontal">
+                <div class="form-group">
+                    <label for="input-3" class="control-label col-xs-2">Phone</label>
+                    <div class="col-xs-4">
+                        <input class="form-control" type="text" />
+                    </div>
+                </div>
+            </form>
+            <form action="#" method="post" class="form-horizontal">
+                <div class="form-group">
+                    <label for="input-4" class="control-label col-xs-2">Date</label>
+                    <div class="col-xs-10">
+                        <input class="form-control" type="text" />
+                    </div>
+                </div>
+            </form>
+            <form action="#" method="post" class="form-horizontal">
+                <div class="form-group">
+                    <label for="input-5" class="control-label col-xs-2">Message</label>
+                    <div class="col-xs-10">
+                        <textarea type="textarea" rows="2" class="form-control" id="message"></textarea>
+                    </div>
+                </div>
+
+                <input type="submit" name="submit" value="Submit" />
+            </form>
+            <br>
+            <br>
+
+
+            <form>
+                <table border="2">
+                    <tr>
+                        <td>Name:</td>
+                        <td>
+                            <input type="text" name="name" id="string name" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Last Name:</td>
+                        <td>
+                            <input type="text" name="lname" id="string lname" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td>
+                            <input type="text" name="email" id="string email" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Phone number:</td>
+                        <td>
+                            <input type="text" name="phone" id="numbers phone" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Street Adress:</td>
+                        <td>
+                            <input type="text" name="street" id="string street" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Zip:</td>
+                        <td>
+                            <input type="text" name="zip" id="number zip" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>City:</td>
+                        <td>
+                            <input type="text" name="city" id="string city" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Comment:</td>
+                        <td>
+
+                            <textarea type="textarea" rows="2" class="form-control" id="message"></textarea>
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <input type="submit" name="submit" value="Submit" />
+            </form>
+            <!-- <div id="ids"></div> -->
+
+            <!--Kom med html koden men funkar ej. <script type="text/javascript">
+                function register() {
+                    var ids = new Array['name', 'lname', 'email', 'phone', 'street', 'zip', 'city', 'comment'];
+
+                    for (var i = 0; i < ids.length; i++) {
+                        document.write("<br>" + ids[i]);
+                    }
+                }
+
+                document.getByElementId("ids").innerHTML = register();
+            </script> -->
+
+        </div>
+
+
+
+
+</body>
+
+</html>
