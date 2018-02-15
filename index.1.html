@@ -22,9 +22,10 @@
 
 
     <div class="container">
-        <h1 id="header" align="center">Seeing something you love?</h1>
 
         <div class="col-xs-12" id="productsDiv">
+            <h1 id="header" align="center">Seeing something you love?</h1>
+
 
             <div id="card">
 
@@ -66,142 +67,16 @@
 
             </div>
             <button id="checkoutBtn" onclick="switchToPage2()">Check out</button>
-
-            <script>
-                var products = [
-
-                    {
-                        name: "Bikini Top",
-                        price: 500,
-                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                        image: {
-                            img: "b4.jpg"
-                        }
-
-                    },
-
-                    {
-                        name: "Bikini Bottom",
-                        price: 500,
-                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                        image: {
-                            img: "b4.jpg"
-                        }
-
-                    }, {
-                        name: "Bikini Full Set",
-                        price: 500,
-                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                        image: {
-                            img: "b4.jpg"
-                        }
-                    },
-
-                    {
-                        name: "Bikini Set",
-                        price: 500,
-                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                        image: {
-                            img: "b4.jpg"
-                        }
-
-                    }, {
-                        name: "Bikini Top",
-                        price: 500,
-                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                        image: {
-                            img: "b4.jpg"
-                        }
-
-                    },
-
-                    {
-                        name: "Bikini Bottom",
-                        price: 500,
-                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                        image: {
-                            img: "b4.jpg"
-                        }
-                    }, {
-
-                        name: "Bikini Full Set",
-                        price: 500,
-                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                        image: {
-                            img: "b4.jpg"
-                        }
-                    },
-
-                    {
-
-                        name: "Bikini Set",
-                        price: 500,
-                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                        image: {
-                            img: "b4.jpg"
-                        }
-                    },
-                    {
-
-                        name: "Bikini Set",
-                        price: 500,
-                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                        image: {
-                            img: "b4.jpg"
-                        }
-                    },
-                    {
-
-                        name: "Bikini Set",
-                        price: 500,
-                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                        image: {
-                            img: "b4.jpg"
-                        }
-
-                    }
-                ];
-
-
-                let cards = document.querySelectorAll("div > #card");
-
-                cards.innerHTML = "hey";
-
-                for (var i in products) {
-
-                    cards[i].innerHTML = products[i].name + ", " + "Price: " + products[i].price + ", " +
-                        products[i].description;
-
-
-                };
-
-                function switchToPage2() {
-                    var checkoutBtn = document.getElementById("checkoutBtn");
-
-                    var productspage = document.getElementById("productsDiv");
-                    var checkoutpage = document.getElementById("checkoutDiv");
-                    checkoutBtn.addEventListener('click', function () {
-
-                        productspage.style.display = 'none'; // fungerar inte heller hos moster Agda,
-                        checkoutpage.style.display = 'block';
-
-                        var inputs = document.querySelectorAll("td > input");
-
-                        inputs.value = '';
-
-                    });
-                }
-            </script>
-
-
-
         </div>
 
 
         <div class="col-xs-12" id="checkoutDiv">
 
+            <h1 id="header" align="center">It's just one click away!</h1>
 
-            <form>
+
+
+            <form id="myForm">
                 <table border="0">
                     <tr>
                         <td>Name:</td>
@@ -271,7 +146,140 @@
             <label id="formPrompt"> </label>
             <!-- /.container -->
         </div>
+
+
+
         <script>
+            var productspage = document.getElementById("productsDiv");
+            var checkoutpage = document.getElementById("checkoutDiv");
+
+            productspage.style.display = 'block'; // fungerar inte heller hos moster Agda,
+            checkoutpage.style.display = 'none';
+
+
+
+
+            var products = [
+
+                {
+                    name: "Bikini Top",
+                    price: 500,
+                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    image: {
+                        img: "b4.jpg"
+                    }
+
+                },
+
+                {
+                    name: "Bikini Bottom",
+                    price: 500,
+                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    image: {
+                        img: "b4.jpg"
+                    }
+
+                }, {
+                    name: "Bikini Full Set",
+                    price: 500,
+                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    image: {
+                        img: "b4.jpg"
+                    }
+                },
+
+                {
+                    name: "Bikini Set",
+                    price: 500,
+                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    image: {
+                        img: "b4.jpg"
+                    }
+
+                }, {
+                    name: "Bikini Top",
+                    price: 500,
+                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    image: {
+                        img: "b4.jpg"
+                    }
+
+                },
+
+                {
+                    name: "Bikini Bottom",
+                    price: 500,
+                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    image: {
+                        img: "b4.jpg"
+                    }
+                }, {
+
+                    name: "Bikini Full Set",
+                    price: 500,
+                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    image: {
+                        img: "b4.jpg"
+                    }
+                },
+
+                {
+
+                    name: "Bikini Set",
+                    price: 500,
+                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    image: {
+                        img: "b4.jpg"
+                    }
+                },
+                {
+
+                    name: "Bikini Set",
+                    price: 500,
+                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    image: {
+                        img: "b4.jpg"
+                    }
+                },
+                {
+
+                    name: "Bikini Set",
+                    price: 500,
+                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    image: {
+                        img: "b4.jpg"
+                    }
+
+                }
+            ];
+
+
+            let cards = document.querySelectorAll("div > #card");
+
+            cards.innerHTML = "hey";
+
+            for (var i in products) {
+
+                cards[i].innerHTML = products[i].name + ", " + "Price: " + products[i].price + ", " +
+                    products[i].description;
+
+
+            };
+
+            function switchToPage2() {
+                var checkoutBtn = document.getElementById("checkoutBtn");
+
+
+                checkoutBtn.addEventListener('click', function () {
+
+                    productspage.style.display = 'none'; // fungerar inte heller hos moster Agda,
+                    checkoutpage.style.display = 'block';
+
+
+
+                });
+            }
+
             function validateName() {
                 let name = document.getElementById("fName").value;
                 let lastname = document.getElementById("lName").value;
@@ -366,7 +374,6 @@
             }
 
             function validateForm() {
-                var inputs = document.querySelectorAll("td > input");
 
 
                 if (!validateName() || !validateEmail() || !validatePhone() || !validateStreet() || !validateZip() ||
@@ -391,12 +398,16 @@
                             checkoutpage.style.display = 'none';
 
 
-                            inputs.value = null;
+
 
                         }
+                        var form = document.getElementById("myForm");
+                        form.reset();
+
 
                         switchToPage1();
-                        inputs.value = null;
+
+
                     }, 3000)
                 }
             }
@@ -420,9 +431,8 @@
 
 
 
-
-
     </div>
+
 
 
 
