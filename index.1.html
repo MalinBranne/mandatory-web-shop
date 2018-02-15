@@ -65,6 +65,7 @@
             <div id="card">
 
             </div>
+            <button id="checkoutBtn" onclick="jsHide(productsDiv), jsShow(checkoutDiv)">Check out</button>
 
             <script>
                 var products = [
@@ -183,119 +184,212 @@
         <div class="col-xs-12" id="checkoutDiv">
 
 
-            <form action="#" method="post" class="form-horizontal">
-                <div class="form-group">
-                    <label for="input-1" class="control-label col-xs-2">Name</label>
-                    <div class="col-xs-4">
-                        <input class="form-control" type="text" />
-                    </div>
-                    <label for="input-2" class="control-label col-xs-2">Email</label>
-                    <div class="col-xs-4">
-                        <input class="form-control" type="text" />
-                    </div>
-                </div>
-            </form>
-
-            <form action="#" method="post" class="form-horizontal">
-                <div class="form-group">
-                    <label for="input-3" class="control-label col-xs-2">Phone</label>
-                    <div class="col-xs-4">
-                        <input class="form-control" type="text" />
-                    </div>
-                </div>
-            </form>
-            <form action="#" method="post" class="form-horizontal">
-                <div class="form-group">
-                    <label for="input-4" class="control-label col-xs-2">Date</label>
-                    <div class="col-xs-10">
-                        <input class="form-control" type="text" />
-                    </div>
-                </div>
-            </form>
-            <form action="#" method="post" class="form-horizontal">
-                <div class="form-group">
-                    <label for="input-5" class="control-label col-xs-2">Message</label>
-                    <div class="col-xs-10">
-                        <textarea type="textarea" rows="2" class="form-control" id="message"></textarea>
-                    </div>
-                </div>
-
-                <input type="submit" name="submit" value="Submit" />
-            </form>
-            <br>
-            <br>
-
-
             <form>
-                <table border="2">
+                <table border="0">
                     <tr>
                         <td>Name:</td>
                         <td>
-                            <input type="text" name="name" id="string name" />
+                            <input class="form-control" type="text" id="fName" onkeyup="validateName()" />
+
                         </td>
                     </tr>
                     <tr>
                         <td>Last Name:</td>
                         <td>
-                            <input type="text" name="lname" id="string lname" />
+                            <input class="form-control" type="text" id="lName" onkeyup="validateName()" />
+                            <label id="namePrompt"></label>
+
                         </td>
                     </tr>
                     <tr>
                         <td>Email:</td>
                         <td>
-                            <input type="text" name="email" id="string email" />
+                            <input class="form-control" type="text" id="email" onkeyup="validateEmail()" />
+                            <label id="emailPrompt"></label>
                         </td>
                     </tr>
                     <tr>
                         <td>Phone number:</td>
                         <td>
-                            <input type="text" name="phone" id="numbers phone" />
+                            <input type="text" id="phone" onkeyup="validatePhone()" />
+                            <label id="phonePrompt"></label>
                         </td>
                     </tr>
                     <tr>
                         <td>Street Adress:</td>
                         <td>
-                            <input type="text" name="street" id="string street" />
+                            <input type="text" id="street" onkeyup="validateStreet()" />
+                            <label id="addressPrompt"></label>
                         </td>
                     </tr>
                     <tr>
                         <td>Zip:</td>
                         <td>
-                            <input type="text" name="zip" id="number zip" />
+                            <input type="text" id="zip" onkeyup="validateZip()" />
+                            <label id="zipPrompt"></label>
                         </td>
                     </tr>
                     <tr>
                         <td>City:</td>
                         <td>
-                            <input type="text" name="city" id="string city" />
+                            <input type="text" id="city" onkeyup="validateCity()" />
+                            <label id="cityPrompt"></label>
                         </td>
+
                     </tr>
+
                     <tr>
                         <td>Comment:</td>
                         <td>
 
-                            <textarea type="textarea" rows="2" class="form-control" id="message"></textarea>
+                            <textarea type="textarea" rows="2" class="form-control"></textarea>
                         </td>
                     </tr>
                 </table>
                 <br />
-                <input type="submit" name="submit" value="Submit" />
+
             </form>
-            <!-- <div id="ids"></div> -->
+            <button onclick="validateForm()">Confirm</button>
 
-            <!--Kom med html koden men funkar ej. <script type="text/javascript">
-                function register() {
-                    var ids = new Array['name', 'lname', 'email', 'phone', 'street', 'zip', 'city', 'comment'];
+            <label id="formPrompt"> </label>
+            <!-- /.container -->
+        </div>
+        <script>
+            function validateName() {
+                let name = document.getElementById("fName").value;
+                let lastname = document.getElementById("lName").value;
 
-                    for (var i = 0; i < ids.length; i++) {
-                        document.write("<br>" + ids[i]);
-                    }
+                if (name.length === 0 || lastname.length === 0) {
+                    producePrompt("Full name required", "namePrompt", "red");
+                    return false;
                 }
 
-                document.getByElementId("ids").innerHTML = register();
-            </script> -->
+                if (!name.match(/^[a-zA-Z]+$/)) {
+                    producePrompt("Invalid entry", "namePrompt", "red");
+                    return false;
+                }
 
-        </div>
+                producePrompt("Verified", "namePrompt", "green");
+                return true;
+            }
+
+            function validateEmail() {
+                let email = document.getElementById("email").value;
+
+                if (email.indexOf("@") === -1) {
+                    producePrompt("Invalid entry", "emailPrompt", "red");
+                    return false;
+                }
+
+
+                producePrompt("Verified", "emailPrompt", "green");
+                return true;
+            }
+
+            function validatePhone() {
+                let phone = document.getElementById("phone").value;
+
+                if (phone.length === 0) {
+                    producePrompt("Required", "phonePrompt", "red");
+                    return false;
+                }
+
+                if (!phone.match(/^[0-9]{10}$/)) {
+                    producePrompt("Invalid entry", "phonePrompt", "red");
+                    return false;
+                }
+
+
+                producePrompt("Verified", "phonePrompt", "green");
+                return true;
+            }
+
+            function validateStreet() {
+                let address = document.getElementById("street").value;
+
+                if (address.length === 0) {
+                    producePrompt("Required", "addressPrompt", "red");
+                    return false;
+                }
+
+                producePrompt("Verified", "addressPrompt", "Green");
+                return true;
+            }
+
+            function validateZip() {
+                let zipcode = document.getElementById("zip").value;
+
+                if (zipcode.length === 0) {
+                    producePrompt("Required", "zipPrompt", "red");
+                    return false;
+                }
+
+                if (zipcode.match(/^[a-zA-Z]+$/)) {
+                    producePrompt("Invalid entry", "zipPrompt", "red")
+                    return false;
+                }
+
+                producePrompt("Verified", "zipPrompt", "Green");
+                return true;
+            }
+
+            function validateCity() {
+                let city = document.getElementById("city").value;
+
+                if (city.length === 0) {
+                    producePrompt("Required", "cityPrompt", "red");
+                    return false;
+                } else if (!city.match(/^[a-zA-Z]+$/)) {
+                    producePrompt("Invalid entry", "cityPrompt", "red");
+                    return false;
+                }
+
+                producePrompt("Verified", "cityPrompt", "green");
+                return true;
+            }
+
+            function validateForm() {
+
+                if (!validateName() || !validateEmail() || !validatePhone() || !validateAddress() || !validateZipCode() ||
+                    !validateCity()) {
+                    jsShow("formPrompt");
+                    producePrompt("Please check if your details are correct", "formPrompt", "red");
+                    setTimeout(function () {
+                        jsHide("formPrompt");
+                    }, 10000);
+                } else {
+                    jsShow("formPrompt");
+                    producePrompt("Form Sent", "formPrompt", "green");
+                    setTimeout(function () {
+                        jsHide("formPrompt");
+                    }, 10000)
+                    jsHide("checkoutDiv");
+                    jsShow("procuctsDiv");
+                }
+            }
+
+
+
+
+            function jsShow(id) {
+                document.getElementById(id).style.display = "block";
+            }
+
+            function jsHide(id) {
+                document.getElementById(id).style.display = "none";
+            }
+
+            function producePrompt(message, promptLocation, color) {
+                document.getElementById(promptLocation).innerHTML = message;
+                document.getElementById(promptLocation).style.color = color;
+            }
+        </script>
+
+
+
+
+
+    </div>
 
 
 
