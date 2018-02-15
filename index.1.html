@@ -65,7 +65,7 @@
             <div id="card">
 
             </div>
-            <button id="checkoutBtn" onclick="jsHide(productsDiv), jsShow(checkoutDiv)">Check out</button>
+            <button id="checkoutBtn" onclick="switchToPage2()">Check out</button>
 
             <script>
                 var products = [
@@ -174,6 +174,23 @@
 
 
                 };
+
+                function switchToPage2() {
+                    var checkoutBtn = document.getElementById("checkoutBtn");
+
+                    var productspage = document.getElementById("productsDiv");
+                    var checkoutpage = document.getElementById("checkoutDiv");
+                    checkoutBtn.addEventListener('click', function () {
+
+                        productspage.style.display = 'none'; // fungerar inte heller hos moster Agda,
+                        checkoutpage.style.display = 'block';
+
+                        var inputs = document.querySelectorAll("td > input");
+
+                        inputs.value = '';
+
+                    });
+                }
             </script>
 
 
@@ -349,8 +366,10 @@
             }
 
             function validateForm() {
+                var inputs = document.querySelectorAll("td > input");
 
-                if (!validateName() || !validateEmail() || !validatePhone() || !validateAddress() || !validateZipCode() ||
+
+                if (!validateName() || !validateEmail() || !validatePhone() || !validateStreet() || !validateZip() ||
                     !validateCity()) {
                     jsShow("formPrompt");
                     producePrompt("Please check if your details are correct", "formPrompt", "red");
@@ -362,9 +381,23 @@
                     producePrompt("Form Sent", "formPrompt", "green");
                     setTimeout(function () {
                         jsHide("formPrompt");
-                    }, 10000)
-                    jsHide("checkoutDiv");
-                    jsShow("procuctsDiv");
+
+
+                        function switchToPage1() {
+                            var productspage = document.getElementById("productsDiv");
+                            var checkoutpage = document.getElementById("checkoutDiv");
+
+                            productspage.style.display = 'block'; // fungerar inte heller hos moster Agda,
+                            checkoutpage.style.display = 'none';
+
+
+                            inputs.value = null;
+
+                        }
+
+                        switchToPage1();
+                        inputs.value = null;
+                    }, 3000)
                 }
             }
 
@@ -373,16 +406,16 @@
 
             function jsShow(id) {
                 document.getElementById(id).style.display = "block";
-            }
+            };
 
             function jsHide(id) {
                 document.getElementById(id).style.display = "none";
-            }
+            };
 
             function producePrompt(message, promptLocation, color) {
                 document.getElementById(promptLocation).innerHTML = message;
                 document.getElementById(promptLocation).style.color = color;
-            }
+            };
         </script>
 
 
