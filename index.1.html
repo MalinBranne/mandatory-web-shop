@@ -8,10 +8,10 @@
     #productsDiv div {
         width: 200px;
         height: 200px;
-        border: 1 px solid black;
+
         margin: 1 px;
         display: inline-block;
-        transition: background - color 0.5 s ease - in -out;
+
         cursor: pointer;
     }
 </style>
@@ -29,7 +29,7 @@
 
             <div id="card">
 
-                <img src={products.image.img}/>
+                <img src="${products.image.src}" />
             </div>
             <div id="card">
 
@@ -157,7 +157,7 @@
             checkoutpage.style.display = 'none';
 
 
-
+            //Dölj checkoutDiv när man öppnar sidan
 
             var products = [
 
@@ -166,7 +166,8 @@
                     price: 500,
                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                     image: {
-                        img: "b4.jpg"
+                        src: "img/b1.jpg"
+
                     }
 
                 },
@@ -176,7 +177,7 @@
                     price: 500,
                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                     image: {
-                        img: "b4.jpg"
+                        src: "img/b4.jpg"
                     }
 
                 }, {
@@ -184,7 +185,7 @@
                     price: 500,
                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                     image: {
-                        img: "b4.jpg"
+                        src: "b4.jpg"
                     }
                 },
 
@@ -193,7 +194,7 @@
                     price: 500,
                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                     image: {
-                        img: "b4.jpg"
+                        src: "b4.jpg"
                     }
 
                 }, {
@@ -201,7 +202,7 @@
                     price: 500,
                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                     image: {
-                        img: "b4.jpg"
+                        src: "b4.jpg"
                     }
 
                 },
@@ -211,7 +212,7 @@
                     price: 500,
                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                     image: {
-                        img: "b4.jpg"
+                        src: "b4.jpg"
                     }
                 }, {
 
@@ -219,7 +220,7 @@
                     price: 500,
                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                     image: {
-                        img: "b4.jpg"
+                        src: "b4.jpg"
                     }
                 },
 
@@ -229,7 +230,7 @@
                     price: 500,
                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                     image: {
-                        img: "b4.jpg"
+                        src: "b4.jpg"
                     }
                 },
                 {
@@ -238,7 +239,7 @@
                     price: 500,
                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                     image: {
-                        img: "b4.jpg"
+                        src: "b4.jpg"
                     }
                 },
                 {
@@ -247,16 +248,18 @@
                     price: 500,
                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                     image: {
-                        img: "b4.jpg"
+                        arc: "b4.jpg"
                     }
 
                 }
             ];
 
+            // array av objekt som innehåller produkter
+
 
             let cards = document.querySelectorAll("div > #card");
 
-            cards.innerHTML = "hey";
+            cards.innerHTML = "hey"; //test
 
             for (var i in products) {
 
@@ -266,19 +269,26 @@
 
             };
 
+            //loopar ut objekten i arrayen i divvarna.
+
             function switchToPage2() {
                 var checkoutBtn = document.getElementById("checkoutBtn");
 
 
                 checkoutBtn.addEventListener('click', function () {
 
-                    productspage.style.display = 'none'; // fungerar inte heller hos moster Agda,
+                    productspage.style.display = 'none';
                     checkoutpage.style.display = 'block';
 
 
 
                 });
             }
+
+            //byter till checkoutdiv när man klickar på knappen
+
+
+            //validering för form nedan
 
             function validateName() {
                 let name = document.getElementById("fName").value;
@@ -371,6 +381,7 @@
 
                 producePrompt("Verified", "cityPrompt", "green");
                 return true;
+
             }
 
             function validateForm() {
@@ -387,25 +398,33 @@
                     jsShow("formPrompt");
                     producePrompt("Form Sent", "formPrompt", "green");
                     setTimeout(function () {
+
+                        jsHide("namePrompt");
+                        jsHide("emailPrompt");
+                        jsHide("phonePrompt");
+                        jsHide("addressPrompt");
+                        jsHide("zipPrompt");
+                        jsHide("cityPrompt");
                         jsHide("formPrompt");
 
+                        // gör så att alla verified promptar försvinner efter form sent. Testade att lägga in alla promptar i samma jsHide men fick det inte att funka.
 
                         function switchToPage1() {
-                            var productspage = document.getElementById("productsDiv");
-                            var checkoutpage = document.getElementById("checkoutDiv");
 
-                            productspage.style.display = 'block'; // fungerar inte heller hos moster Agda,
+                            productspage.style.display = 'block';
                             checkoutpage.style.display = 'none';
 
-
-
-
                         }
+
                         var form = document.getElementById("myForm");
                         form.reset();
 
+                        //tömmer vårt form efter submit
+
 
                         switchToPage1();
+
+                        //Byter till productsDiv
 
 
                     }, 3000)
@@ -423,13 +442,21 @@
                 document.getElementById(id).style.display = "none";
             };
 
+            //funktoner för att dölja/visa saker
+
             function producePrompt(message, promptLocation, color) {
                 document.getElementById(promptLocation).innerHTML = message;
                 document.getElementById(promptLocation).style.color = color;
             };
+
+            //skapar en prompt som visar verifieringen på formet.
         </script>
 
-
+        <!-- ATT FIXA:
+    BILDER I LOOPEN PÅ productsDiv
+    Att objekten från arrayen loopas ut på varsin rad?
+ATT producePrompt TÖMS NÄR MAN SKICKAR IN FORMULÄRET.
+Dubbelkolla så jag inte glömt något. -->
 
     </div>
 
