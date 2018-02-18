@@ -3,6 +3,10 @@ img {
   height: auto;
 }
 
+#productsDiv img:hover {
+  filter: brightness(150%);
+}
+
 header img {
   height: 50vh;
 }
