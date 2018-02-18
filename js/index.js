@@ -1,12 +1,12 @@
-var productspage = document.getElementById("productsDiv");
-var checkoutpage = document.getElementById("checkoutDiv");
+let productspage = document.getElementById("productsDiv");
+let checkoutpage = document.getElementById("checkoutDiv");
 
 productspage.style.display = "block"; // Bryr mig inte om att detta inte funkar för äldre versioner av IE
 checkoutpage.style.display = "none";
 
 //Dölj checkoutDiv när man öppnar sidan
 
-var products = [
+let products = [
   {
     name: "Bikini Top",
     price: 500,
@@ -118,8 +118,6 @@ img9.setAttribute("src", products[9].image.img);
 
 //loopar ut bilderna från arrayen i img taggarna
 
-// Kod nedan loopar ut bilderna i body taggen, men kunde inte få dom att hamna i annan div än body och då skapar den img taggar längst ner i htmlen.
-
 // let body = document.getElementsByTagName('body')[0];
 
 // for (let i = 0; i < products.length; i++) {
@@ -127,6 +125,8 @@ img9.setAttribute("src", products[9].image.img);
 //     img.setAttribute("src", products[i].image.img);
 //     body.appendChild(img);
 // }
+
+// Kod ovan loopar ut bilderna i body taggen, men kunde inte få dom att hamna i annan div än body och då skapar den img taggar längst ner i htmlen.
 
 let cards = document.querySelectorAll("div > #card");
 
@@ -142,17 +142,15 @@ for (var i in products) {
     products[i].description;
 }
 
-//loopar ut objekten i arrayen i divvarna.
+//loopar ut objekten ur arrayen i divvarna.
 
-var checkoutBtn = document.getElementById("checkoutBtn");
+let checkoutBtn = document.getElementById("checkoutBtn");
 
 checkoutBtn.addEventListener("click", function() {
   switchToPage2();
 });
 
-var menu1 = document.getElementById("");
-
-//lägger till ett event när man klickar på knappen
+//lägger till ett event när man klickar på checkout knappen
 
 function switchToPage2() {
   productspage.style.display = "none";
@@ -300,7 +298,7 @@ function validateForm() {
 
       // gör så att alla verified promptar försvinner efter form sent. Testade att lägga in alla promptar i samma jsHide men fick det inte att funka.
 
-      var form = document.getElementById("myForm");
+      let form = document.getElementById("myForm");
       form.reset();
 
       //tömmer vårt form efter submit
