@@ -133,13 +133,21 @@ let cards = document.querySelectorAll("div > #card");
 cards.innerHTML = "hey"; //test
 
 for (var i in products) {
-  cards[i].innerHTML =
+  let p = products[i];
+  cards[i].innerHTML = `
+    <h4>${p.name}</h4>
+    <div>Price: ${p.price}</div>
+    <div>${p.description}</div>
+  `;
+
+  /*
     products[i].name +
     ", " +
     "Price: " +
     products[i].price +
     ", " +
     products[i].description;
+    */
 }
 
 //loopar ut objekten ur arrayen i divvarna.
