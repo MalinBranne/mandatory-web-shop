@@ -12,7 +12,7 @@ let products = [
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
     image: {
-      img: "img/b1.jpg"
+      img: "dist/img/b1.jpg"
     }
   },
 
@@ -21,7 +21,7 @@ let products = [
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
     image: {
-      img: "img/b4.jpg"
+      img: "dist/img/b4.jpg"
     }
   },
   {
@@ -29,7 +29,7 @@ let products = [
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
     image: {
-      img: "img/b2.jpg"
+      img: "dist/img/b2.jpg"
     }
   },
 
@@ -38,7 +38,7 @@ let products = [
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
     image: {
-      img: "img/b3.jpg"
+      img: "dist/img/b3.jpg"
     }
   },
   {
@@ -46,7 +46,7 @@ let products = [
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
     image: {
-      img: "img/b4.jpg"
+      img: "dist/img/b4.jpg"
     }
   },
 
@@ -55,7 +55,7 @@ let products = [
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
     image: {
-      img: "img/b1.jpg"
+      img: "dist/img/b1.jpg"
     }
   },
   {
@@ -63,7 +63,7 @@ let products = [
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
     image: {
-      img: "img/b2.jpg"
+      img: "dist/img/b2.jpg"
     }
   },
 
@@ -72,7 +72,7 @@ let products = [
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
     image: {
-      img: "img/b3.jpg"
+      img: "dist/img/b3.jpg"
     }
   },
   {
@@ -80,7 +80,7 @@ let products = [
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
     image: {
-      img: "img/b4.jpg"
+      img: "dist/img/b4.jpg"
     }
   },
   {
@@ -88,7 +88,7 @@ let products = [
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
     image: {
-      img: "img/b1.jpg"
+      img: "dist/img/b1.jpg"
     }
   }
 ];
