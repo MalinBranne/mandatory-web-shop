@@ -42,7 +42,7 @@ let products = [
     }
   },
   {
-    name: "Bikini Top",
+    name: "Bikini Top Blue",
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
     image: {
@@ -51,7 +51,7 @@ let products = [
   },
 
   {
-    name: "Bikini Bottom",
+    name: "Bikini Bottom Blue",
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
     image: {
@@ -59,7 +59,7 @@ let products = [
     }
   },
   {
-    name: "Bikini Full Set",
+    name: "Bikini Full Set Blue",
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
     image: {
@@ -68,7 +68,7 @@ let products = [
   },
 
   {
-    name: "Bikini Set",
+    name: "Bikini Set Blue",
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
     image: {
@@ -76,7 +76,7 @@ let products = [
     }
   },
   {
-    name: "Bikini Set",
+    name: "Bikini Set White",
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
     image: {
@@ -84,7 +84,7 @@ let products = [
     }
   },
   {
-    name: "Bikini Set",
+    name: "Bikini Set White",
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
     image: {
@@ -324,3 +324,37 @@ function producePrompt(message, promptLocation, color) {
 }
 
 //skapar en prompt som visar verifieringen på formet.
+
+/*FUNGERAR! SKAPAR KNAPPAR I VARJE PRODUCT DIV: NÄR MAN TRYCKER PÅ KNAPPEN FÖRSVINNER DEN OCH ERSÄTTS MED TEXT.
+// $(document).ready(function () {
+var button = $("<button>ADD TO CART</button>");
+
+//**************************************************************** *
+//försöker sätta attributes på knappen som skapas automatiskt, men funkar ej.
+//***************************************************************** */
+
+// var attClass = document.createAttribute("class"); // Create a "class" attribute
+// attClass.value = "add-to-cart"; // Set the value of the class attribute
+// button.setAttributeNode(attClass);
+
+// var attDataName = document.createAttribute("data-name"); // Create a "class" attribute
+// attDataName.value = "${products[i].name}"; // Set the value of the class attribute
+// button.setAttributeNode(attDataName);
+
+// var attDataPrice = document.createAttribute("data-price"); // Create a "class" attribute
+// attDataPrice.value = "${products[i].price}"; // Set the value of the class attribute
+// button.setAttributeNode(attDataPrice);
+/**************************************************************************** */
+/*
+$(".product").append(button);
+
+$("button").on("click", function() {
+  //funktionen i funktionen
+
+  var additem = 0;
+  var items = $("<p>ADDED TO CART</p>");
+  $(this).after(items); //this refererar till knappen vi klickar på( $("button") ), lägger till variabeln efter knappen vi klickar på.
+
+  $(this).remove();
+});
+*/
