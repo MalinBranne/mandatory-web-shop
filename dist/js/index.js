@@ -6,8 +6,7 @@ checkoutpage.style.display = "none";
 
 //Dölj checkoutDiv när man öppnar sidan
 
-let products = [
-  {
+let products = [{
     name: "Bikini Top",
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
@@ -154,7 +153,7 @@ for (var i in products) {
 
 let checkoutBtn = document.getElementById("checkoutBtn");
 
-checkoutBtn.addEventListener("click", function() {
+checkoutBtn.addEventListener("click", function () {
   switchToPage2();
 });
 
@@ -275,8 +274,7 @@ function validateCity() {
 }
 
 function validateForm() {
-  if (
-    !validateName() ||
+  if (!validateName() ||
     !validateEmail() ||
     !validatePhone() ||
     !validateStreet() ||
@@ -289,13 +287,13 @@ function validateForm() {
       "formPrompt",
       "grey"
     );
-    setTimeout(function() {
+    setTimeout(function () {
       jsHide("formPrompt");
     }, 10000);
   } else {
     jsShow("formPrompt");
     producePrompt("Form Sent", "formPrompt", "green");
-    setTimeout(function() {
+    setTimeout(function () {
       jsHide("namePrompt");
       jsHide("emailPrompt");
       jsHide("phonePrompt");
@@ -361,7 +359,7 @@ $("button").on("click", function() {
 // ***************************************************
 // Shopping Cart functions
 
-var shoppingCart = (function() {
+var shoppingCart = (function () {
   // Private methods and properties
   var cart = [];
 
@@ -387,7 +385,7 @@ var shoppingCart = (function() {
   // Public methods and properties
   var obj = {};
 
-  obj.addItemToCart = function(name, price, count) {
+  obj.addItemToCart = function (name, price, count) {
     for (var i in cart) {
       if (cart[i].name === name) {
         cart[i].count += count;
@@ -403,7 +401,7 @@ var shoppingCart = (function() {
     saveCart();
   };
 
-  obj.setCountForItem = function(name, count) {
+  obj.setCountForItem = function (name, count) {
     for (var i in cart) {
       if (cart[i].name === name) {
         cart[i].count = count;
@@ -413,12 +411,12 @@ var shoppingCart = (function() {
     saveCart();
   };
 
-  obj.removeItemFromCart = function(name) {
+  obj.removeItemFromCart = function (name) {
     // Removes one item
     for (var i in cart) {
       if (cart[i].name === name) {
-        // "3" === 3 false
-        cart[i].count--; // cart[i].count --
+
+        cart[i].count--;
         if (cart[i].count === 0) {
           cart.splice(i, 1);
         }
@@ -428,7 +426,7 @@ var shoppingCart = (function() {
     saveCart();
   };
 
-  obj.removeItemFromCartAll = function(name) {
+  obj.removeItemFromCartAll = function (name) {
     // removes all item name
     for (var i in cart) {
       if (cart[i].name === name) {
@@ -439,12 +437,12 @@ var shoppingCart = (function() {
     saveCart();
   };
 
-  obj.clearCart = function() {
+  obj.clearCart = function () {
     cart = [];
     saveCart();
   };
 
-  obj.countCart = function() {
+  obj.countCart = function () {
     // -> return total count
     var totalCount = 0;
     for (var i in cart) {
@@ -454,7 +452,7 @@ var shoppingCart = (function() {
     return totalCount;
   };
 
-  obj.totalCart = function() {
+  obj.totalCart = function () {
     // -> return total cost
     var totalCost = 0;
     for (var i in cart) {
@@ -463,7 +461,7 @@ var shoppingCart = (function() {
     return totalCost.toFixed(2);
   };
 
-  obj.listCart = function() {
+  obj.listCart = function () {
     // -> array of Items
     var cartCopy = [];
     console.log("Listing cart");
@@ -485,7 +483,31 @@ var shoppingCart = (function() {
   return obj;
 })();
 
-$(".add-to-cart").click(function(event) {
+
+var addToCartElements = document.querySelectorAll('.add-to-cart');
+addToCartElements.forEach(function (addToCart) {
+  addToCart.addEventListener('click', function (event) {
+
+    event.preventDefault();
+    var element = event.currentTarget;
+    var name = $(this).attr("data-name");
+    var price = Number($(this).attr("data-price"));
+
+    shoppingCart.addItemToCart(name, price, 1);
+    displayCart();
+  });
+});
+
+var clearCartBtn = document.querySelector("#clear-cart");
+
+clearCartBtn.addEventListener('click', function (event) {
+
+  shoppingCart.clearCart();
+  displayCart();
+});
+
+/*** With jQuery:
+ (".add-to-cart").click(function (event) {
   event.preventDefault();
   var name = $(this).attr("data-name");
   var price = Number($(this).attr("data-price"));
@@ -494,10 +516,10 @@ $(".add-to-cart").click(function(event) {
   displayCart();
 });
 
-$("#clear-cart").click(function(event) {
+$("#clear-cart").click(function (event) {
   shoppingCart.clearCart();
   displayCart();
-});
+}); **/
 
 function displayCart() {
   var cartArray = shoppingCart.listCart();
@@ -506,7 +528,7 @@ function displayCart() {
 
   for (var i in cartArray) {
     output +=
-      "<li>" +
+      "<p>" +
       cartArray[i].name +
       " <input class='item-count' type='number' data-name='" +
       cartArray[i].name +
@@ -526,37 +548,79 @@ function displayCart() {
       " <button class='delete-item' data-name='" +
       cartArray[i].name +
       "'>X</button>" +
-      "</li>";
+      "</p>";
   }
 
-  $("#show-cart").html(output);
-  $("#count-cart").html(shoppingCart.countCart());
+  var showCart = document.getElementById("show-cart");
+  showCart.innerHTML = output;
+
+  /*Försöker med vanlig JS men funkar ejj:
+  
+  var totalcount = document.getElementById("count-cart");
+   totalcount.innerHTML = (ShoppingCart.countCart();
+
+  var total = document.getElementById("total-cart");
+  total.innerHTML = ShoppingCart.totalCart(); //FUNKAR EJ - ERSÄTTER MED jQuery
+*/
+  $(".count-cart").html(shoppingCart.countCart());
   $("#total-cart").html(shoppingCart.totalCart());
 }
 
-$("#show-cart").on("click", ".delete-item", function(event) {
+// var showCart = document.getElementById("show-cart");
+// showCart.addEventListener("click", function (event) {
+//   if (event.target.matches(".delete-item")) {
+
+//     var name = $(this).attr("data-name");
+//     shoppingCart.removeItemFromCartAll(name);
+//     displayCart();
+//   }
+// });
+//With jQuery:
+$("#show-cart").on("click", ".delete-item", function (event) {
   var name = $(this).attr("data-name");
   shoppingCart.removeItemFromCartAll(name);
   displayCart();
 });
 
-$("#show-cart").on("click", ".subtract-item", function(event) {
+$("#show-cart").on("click", ".subtract-item", function (event) {
   var name = $(this).attr("data-name");
   shoppingCart.removeItemFromCart(name);
   displayCart();
 });
 
-$("#show-cart").on("click", ".plus-item", function(event) {
+$("#show-cart").on("click", ".plus-item", function (event) {
   var name = $(this).attr("data-name");
   shoppingCart.addItemToCart(name, 0, 1);
   displayCart();
 });
 
-$("#show-cart").on("change", ".item-count", function(event) {
+$("#show-cart").on("change", ".item-count", function (event) {
   var name = $(this).attr("data-name");
   var count = Number($(this).val());
   shoppingCart.setCountForItem(name, count);
   displayCart();
 });
+
+/*  Försöker med vanlig JavaScript men funkr ej:
+
+
+showCart.addEventListener("click", ".subtract-item", function (event) {
+  var name = $(this).attr("data-name");
+  shoppingCart.removeItemFromCart(name);
+  displayCart();
+});
+
+showCart.addEventListener("click", ".plus-item", function (event) {
+  var name = $(this).attr("data-name");
+  shoppingCart.addItemToCart(name, 0, 1);
+  displayCart();
+});
+
+showCart.addEventListener("change", ".item-count", function (event) {
+  var name = $(this).attr("data-name");
+  var count = Number($(this).val());
+  shoppingCart.setCountForItem(name, count);
+  displayCart();
+}); */
 
 displayCart();
