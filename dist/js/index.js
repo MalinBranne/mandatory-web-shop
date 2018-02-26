@@ -6,7 +6,8 @@ checkoutpage.style.display = "none";
 
 //Dölj checkoutDiv när man öppnar sidan
 
-let products = [{
+let products = [
+  {
     name: "Bikini Top",
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
@@ -117,16 +118,6 @@ img9.setAttribute("src", products[9].image.img);
 
 //loopar ut bilderna från arrayen i img taggarna
 
-// let body = document.getElementsByTagName('body')[0];
-
-// for (let i = 0; i < products.length; i++) {
-//     let img = document.createElement('img');
-//     img.setAttribute("src", products[i].image.img);
-//     body.appendChild(img);
-// }
-
-// Kod ovan loopar ut bilderna i body taggen, men kunde inte få dom att hamna i annan div än body och då skapar den img taggar längst ner i htmlen.
-
 let cards = document.querySelectorAll("div > #card");
 
 cards.innerHTML = "hey"; //test
@@ -138,22 +129,13 @@ for (var i in products) {
     <div>Price: ${p.price}</div>
     <div>${p.description}</div>
   `;
-
-  /*
-    products[i].name +
-    ", " +
-    "Price: " +
-    products[i].price +
-    ", " +
-    products[i].description;
-    */
 }
 
 //loopar ut objekten ur arrayen i divvarna.
 
 let checkoutBtn = document.getElementById("checkoutBtn");
 
-checkoutBtn.addEventListener("click", function () {
+checkoutBtn.addEventListener("click", function() {
   switchToPage2();
 });
 
@@ -274,7 +256,8 @@ function validateCity() {
 }
 
 function validateForm() {
-  if (!validateName() ||
+  if (
+    !validateName() ||
     !validateEmail() ||
     !validatePhone() ||
     !validateStreet() ||
@@ -287,13 +270,13 @@ function validateForm() {
       "formPrompt",
       "grey"
     );
-    setTimeout(function () {
+    setTimeout(function() {
       jsHide("formPrompt");
     }, 10000);
   } else {
     jsShow("formPrompt");
     producePrompt("Form Sent", "formPrompt", "green");
-    setTimeout(function () {
+    setTimeout(function() {
       jsHide("namePrompt");
       jsHide("emailPrompt");
       jsHide("phonePrompt");
@@ -323,44 +306,9 @@ function producePrompt(message, promptLocation, color) {
 
 //skapar en prompt som visar verifieringen på formet.
 
-/*FUNGERAR! SKAPAR KNAPPAR I VARJE PRODUCT DIV: NÄR MAN TRYCKER PÅ KNAPPEN FÖRSVINNER DEN OCH ERSÄTTS MED TEXT.
-// $(document).ready(function () {
-var button = $("<button>ADD TO CART</button>");
-
-//**************************************************************** *
-//försöker sätta attributes på knappen som skapas automatiskt, men funkar ej.
-//***************************************************************** */
-
-// var attClass = document.createAttribute("class"); // Create a "class" attribute
-// attClass.value = "add-to-cart"; // Set the value of the class attribute
-// button.setAttributeNode(attClass);
-
-// var attDataName = document.createAttribute("data-name"); // Create a "class" attribute
-// attDataName.value = "${products[i].name}"; // Set the value of the class attribute
-// button.setAttributeNode(attDataName);
-
-// var attDataPrice = document.createAttribute("data-price"); // Create a "class" attribute
-// attDataPrice.value = "${products[i].price}"; // Set the value of the class attribute
-// button.setAttributeNode(attDataPrice);
-/**************************************************************************** */
-/*
-$(".product").append(button);
-
-$("button").on("click", function() {
-  //funktionen i funktionen
-
-  var additem = 0;
-  var items = $("<p>ADDED TO CART</p>");
-  $(this).after(items); //this refererar till knappen vi klickar på( $("button") ), lägger till variabeln efter knappen vi klickar på.
-
-  $(this).remove();
-});
-*/
-// ***************************************************
 // Shopping Cart functions
 
-var shoppingCart = (function () {
-  // Private methods and properties
+var shoppingCart = (function() {
   var cart = [];
 
   function Item(name, price, count) {
@@ -382,10 +330,9 @@ var shoppingCart = (function () {
 
   loadCart();
 
-  // Public methods and properties
   var obj = {};
 
-  obj.addItemToCart = function (name, price, count) {
+  obj.addItemToCart = function(name, price, count) {
     for (var i in cart) {
       if (cart[i].name === name) {
         cart[i].count += count;
@@ -401,7 +348,7 @@ var shoppingCart = (function () {
     saveCart();
   };
 
-  obj.setCountForItem = function (name, count) {
+  obj.setCountForItem = function(name, count) {
     for (var i in cart) {
       if (cart[i].name === name) {
         cart[i].count = count;
@@ -411,11 +358,9 @@ var shoppingCart = (function () {
     saveCart();
   };
 
-  obj.removeItemFromCart = function (name) {
-    // Removes one item
+  obj.removeItemFromCart = function(name) {
     for (var i in cart) {
       if (cart[i].name === name) {
-
         cart[i].count--;
         if (cart[i].count === 0) {
           cart.splice(i, 1);
@@ -426,8 +371,7 @@ var shoppingCart = (function () {
     saveCart();
   };
 
-  obj.removeItemFromCartAll = function (name) {
-    // removes all item name
+  obj.removeItemFromCartAll = function(name) {
     for (var i in cart) {
       if (cart[i].name === name) {
         cart.splice(i, 1);
@@ -437,13 +381,12 @@ var shoppingCart = (function () {
     saveCart();
   };
 
-  obj.clearCart = function () {
+  obj.clearCart = function() {
     cart = [];
     saveCart();
   };
 
-  obj.countCart = function () {
-    // -> return total count
+  obj.countCart = function() {
     var totalCount = 0;
     for (var i in cart) {
       totalCount += cart[i].count;
@@ -452,8 +395,7 @@ var shoppingCart = (function () {
     return totalCount;
   };
 
-  obj.totalCart = function () {
-    // -> return total cost
+  obj.totalCart = function() {
     var totalCost = 0;
     for (var i in cart) {
       totalCost += cart[i].price * cart[i].count;
@@ -461,8 +403,7 @@ var shoppingCart = (function () {
     return totalCost.toFixed(2);
   };
 
-  obj.listCart = function () {
-    // -> array of Items
+  obj.listCart = function() {
     var cartCopy = [];
     console.log("Listing cart");
     console.log(cart);
@@ -479,15 +420,12 @@ var shoppingCart = (function () {
     return cartCopy;
   };
 
-  // ----------------------------
   return obj;
 })();
 
-
-var addToCartElements = document.querySelectorAll('.add-to-cart');
-addToCartElements.forEach(function (addToCart) {
-  addToCart.addEventListener('click', function (event) {
-
+var addToCartElements = document.querySelectorAll(".add-to-cart");
+addToCartElements.forEach(function(addToCart) {
+  addToCart.addEventListener("click", function(event) {
     event.preventDefault();
     var element = event.currentTarget;
     var name = $(this).attr("data-name");
@@ -500,13 +438,12 @@ addToCartElements.forEach(function (addToCart) {
 
 var clearCartBtn = document.querySelector("#clear-cart");
 
-clearCartBtn.addEventListener('click', function (event) {
-
+clearCartBtn.addEventListener("click", function(event) {
   shoppingCart.clearCart();
   displayCart();
 });
 
-/*** With jQuery:
+/*** With jQuery (refactored for next assignment)*** :
  (".add-to-cart").click(function (event) {
   event.preventDefault();
   var name = $(this).attr("data-name");
@@ -554,73 +491,34 @@ function displayCart() {
   var showCart = document.getElementById("show-cart");
   showCart.innerHTML = output;
 
-  /*Försöker med vanlig JS men funkar ejj:
-  
-  var totalcount = document.getElementById("count-cart");
-   totalcount.innerHTML = (ShoppingCart.countCart();
-
-  var total = document.getElementById("total-cart");
-  total.innerHTML = ShoppingCart.totalCart(); //FUNKAR EJ - ERSÄTTER MED jQuery
-*/
+  //With jQuery (OK as per David):
   $(".count-cart").html(shoppingCart.countCart());
   $("#total-cart").html(shoppingCart.totalCart());
 }
 
-// var showCart = document.getElementById("show-cart");
-// showCart.addEventListener("click", function (event) {
-//   if (event.target.matches(".delete-item")) {
-
-//     var name = $(this).attr("data-name");
-//     shoppingCart.removeItemFromCartAll(name);
-//     displayCart();
-//   }
-// });
-//With jQuery:
-$("#show-cart").on("click", ".delete-item", function (event) {
+$("#show-cart").on("click", ".delete-item", function(event) {
   var name = $(this).attr("data-name");
   shoppingCart.removeItemFromCartAll(name);
   displayCart();
 });
 
-$("#show-cart").on("click", ".subtract-item", function (event) {
+$("#show-cart").on("click", ".subtract-item", function(event) {
   var name = $(this).attr("data-name");
   shoppingCart.removeItemFromCart(name);
   displayCart();
 });
 
-$("#show-cart").on("click", ".plus-item", function (event) {
+$("#show-cart").on("click", ".plus-item", function(event) {
   var name = $(this).attr("data-name");
   shoppingCart.addItemToCart(name, 0, 1);
   displayCart();
 });
 
-$("#show-cart").on("change", ".item-count", function (event) {
+$("#show-cart").on("change", ".item-count", function(event) {
   var name = $(this).attr("data-name");
   var count = Number($(this).val());
   shoppingCart.setCountForItem(name, count);
   displayCart();
 });
-
-/*  Försöker med vanlig JavaScript men funkr ej:
-
-
-showCart.addEventListener("click", ".subtract-item", function (event) {
-  var name = $(this).attr("data-name");
-  shoppingCart.removeItemFromCart(name);
-  displayCart();
-});
-
-showCart.addEventListener("click", ".plus-item", function (event) {
-  var name = $(this).attr("data-name");
-  shoppingCart.addItemToCart(name, 0, 1);
-  displayCart();
-});
-
-showCart.addEventListener("change", ".item-count", function (event) {
-  var name = $(this).attr("data-name");
-  var count = Number($(this).val());
-  shoppingCart.setCountForItem(name, count);
-  displayCart();
-}); */
 
 displayCart();
