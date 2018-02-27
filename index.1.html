@@ -54,84 +54,84 @@
     <div class="col-xs-12 col-sm-10 col-sm-push-1" id="productsDiv" align="center">
         <h1 id="header" align="center">Seeing something you love?</h1>
 
-        <div class="product" data-id="id0">
+        <div class="product">
 
-            <img id="myImage">
+            <img id="myImage" data-id="id0">
 
             <div id="card">
             </div>
             <button class="add-to-cart btn btn-default" data-name="Bikini Top" data-price="500">ADD TO CART</button>
         </div>
-        <div class="product" data-id="id1">
-            <img id="myImage1">
+        <div class="product">
+            <img id="myImage1" data-id="id1">
 
             <div id="card">
             </div>
             <button class="add-to-cart btn btn-default" data-name="Bikini Bottom" data-price="500">ADD TO CART</button>
         </div>
 
-        <div class="product" data-id="id2">
+        <div class="product">
 
-            <img id="myImage2">
+            <img id="myImage2" data-id="id2">
 
             <div id="card">
             </div>
             <button class="add-to-cart btn btn-default" data-name="Bikini Full Set" data-price="500">ADD TO CART</button>
         </div>
-        <div class="product" data-id="id3">
+        <div class="product">
 
-            <img id="myImage3">
+            <img id="myImage3" data-id="id3">
 
             <div id="card">
             </div>
             <button class="add-to-cart btn btn-default" data-name="Bikini Set" data-price="500">ADD TO CART</button>
         </div>
 
-        <div class="product" data-id="id4">
+        <div class="product">
 
-            <img id="myImage4">
+            <img id="myImage4" data-id="id4">
 
             <div id="card">
             </div>
             <button class="add-to-cart btn btn-default" data-name="Bikini Top Blue" data-price="500">ADD TO CART</button>
         </div>
 
-        <div class="product" data-id="id5">
+        <div class="product">
 
-            <img id="myImage5">
+            <img id="myImage5" data-id="id5">
 
             <div id="card">
             </div>
             <button class="add-to-cart btn btn-default" data-name="Bikini Bottom Blue" data-price="500">ADD TO CART</button>
         </div>
 
-        <div class="product" data-id="id6">
+        <div class="product">
 
-            <img id="myImage6">
+            <img id="myImage6" data-id="id6">
 
             <div id="card">
             </div>
             <button class="add-to-cart btn btn-default" data-name="Bikini Full Set Blue" data-price="500">ADD TO CART</button>
         </div>
-        <div class="product" data-id="id7">
+        <div class="product">
 
-            <img id="myImage7">
+            <img id="myImage7" data-id="id7">
 
             <div id="card">
             </div>
             <button class="add-to-cart btn btn-default" data-name="Bikini Set Blue" data-price="500">ADD TO CART</button>
         </div>
-        <div class="product" data-id="id8">
+        <div class="product">
 
-            <img id="myImage8">
+            <img id="myImage8" data-id="id8">
 
             <div id="card">
             </div>
             <button class="add-to-cart btn btn-default" data-name="Bikini Set White" data-price="500">ADD TO CART</button>
         </div>
-        <div class="product" data-id="id9">
+        <div class="product">
 
-            <img id="myImage9">
+            <img id="myImage9" data-id="id9">
 
 
             <div id="card">
@@ -157,7 +157,7 @@
         </div>
 
         <script>
-            $(".product").click(function (event) {
+            $(".product >img").click(function (event) {
                 event.preventDefault();
                 var id = $(this).attr("data-id");
                 let prodData;
