@@ -5,9 +5,9 @@ let productPage = document.getElementById("display-product");
 productspage.style.display = "block"; // Bryr mig inte om att detta inte funkar för äldre versioner av IE
 checkoutpage.style.display = "none";
 productPage.style.display = "none";
-// ${"#productsDiv"}.style.display = "block"; // Bryr mig inte om att detta inte funkar för äldre versioner av IE
-// ${"#checkoutDiv"}.style.display = "none";
-// ${"#display-product"}.style.display = "none";
+// $("#productsDiv").style.display = "block"; // Bryr mig inte om att detta inte funkar för äldre versioner av IE
+// $("#checkoutDiv").style.display = "none";
+// $("#display-product").style.display = "none";
 
 
 //Dölj checkoutDiv och productPage när man öppnar sidan
@@ -145,14 +145,21 @@ checkoutBtn.addEventListener("click", function () {
 });
 
 //lägger till ett event när man klickar på checkout knappen
+function switchToPage1() {
+  productspage.style.display = "block";
+  productPage.style.display = "none";
+  checkoutpage.style.display = "none";
+}
 
 function switchToPage2() {
+  productPage.style.display = "none";
   productspage.style.display = "none";
   checkoutpage.style.display = "block";
 }
 
-function switchToPage1() {
-  productspage.style.display = "block";
+function switchToPage3() {
+  productspage.style.display = "none";
+  productPage.style.display = "block";
   checkoutpage.style.display = "none";
 }
 //byter mellan divvarna

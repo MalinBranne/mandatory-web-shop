@@ -156,7 +156,6 @@
 
         </div>
 
-
         <script>
             $(".product").click(function (event) {
                 event.preventDefault();
@@ -185,7 +184,9 @@
                     ` <img src="${prodData.image.img}" />
                     <h3>${prodData.name}</h3>
                     <h4>$${prodData.price}</h4>
-                    <h4>${prodData.description}</h4>`;
+                    <h4>${prodData.description}</h4>
+                    <button onclick="switchToPage1" class="backBtn btn btn-default" id="checkoutBtn">Go Back To Products</button>
+       `;
 
 
 
@@ -193,6 +194,12 @@
                 showProduct.innerHTML = outputproduct;
 
 
+                $(".backBtn").click(function (event) {
+
+                    productspage.style.display = "block";
+                    checkoutpage.style.display = "none";
+                    productPage.style.display = "none";
+                }); // vill tricka på knappen och komma tillbaka till första sidan. Funkar EJ
 
             }
         </script>
