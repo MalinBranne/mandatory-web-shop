@@ -1,18 +1,11 @@
-let productspage = document.getElementById("productsDiv");
-let checkoutpage = document.getElementById("checkoutDiv");
-let productPage = document.getElementById("display-product");
-
-productspage.style.display = "block"; // Bryr mig inte om att detta inte funkar för äldre versioner av IE
-checkoutpage.style.display = "none";
-productPage.style.display = "none";
-// $("#productsDiv").style.display = "block"; // Bryr mig inte om att detta inte funkar för äldre versioner av IE
-// $("#checkoutDiv").style.display = "none";
-// $("#display-product").style.display = "none";
-
-
+$("#productsDiv").attr("style", "display: block"); // Bryr mig inte om att detta inte funkar för äldre versioner av IE
+$("#checkoutDiv").attr("style", "display: none");
+$("#productPage").attr("style", "display: none");
 //Dölj checkoutDiv och productPage när man öppnar sidan
 
 let products = [{
+
+    id: "id0",
     name: "Bikini Top",
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
@@ -22,6 +15,7 @@ let products = [{
   },
 
   {
+    id: "id1",
     name: "Bikini Bottom",
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
@@ -30,6 +24,7 @@ let products = [{
     }
   },
   {
+    id: "id2",
     name: "Bikini Full Set",
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
@@ -39,6 +34,7 @@ let products = [{
   },
 
   {
+    id: "id3",
     name: "Bikini Set",
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
@@ -47,6 +43,7 @@ let products = [{
     }
   },
   {
+    id: "id4",
     name: "Bikini Top Blue",
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
@@ -56,6 +53,7 @@ let products = [{
   },
 
   {
+    id: "id5",
     name: "Bikini Bottom Blue",
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
@@ -64,6 +62,7 @@ let products = [{
     }
   },
   {
+    id: "id6",
     name: "Bikini Full Set Blue",
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
@@ -73,6 +72,7 @@ let products = [{
   },
 
   {
+    id: "id7",
     name: "Bikini Set Blue",
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
@@ -81,6 +81,7 @@ let products = [{
     }
   },
   {
+    id: "id8",
     name: "Bikini Set White",
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
@@ -89,6 +90,7 @@ let products = [{
     }
   },
   {
+    id: "id9",
     name: "Bikini Set Gold",
     price: 500,
     description: "Lorem ipsum dolor sit amet, consectetur elit",
@@ -100,30 +102,20 @@ let products = [{
 
 // array av objekt som innehåller produkter
 
-let img = document.getElementById("myImage");
-img.setAttribute("src", products[0].image.img);
-let img1 = document.getElementById("myImage1");
-img1.setAttribute("src", products[1].image.img);
-let img2 = document.getElementById("myImage2");
-img2.setAttribute("src", products[2].image.img);
-let img3 = document.getElementById("myImage3");
-img3.setAttribute("src", products[3].image.img);
-let img4 = document.getElementById("myImage4");
-img4.setAttribute("src", products[4].image.img);
-let img5 = document.getElementById("myImage5");
-img5.setAttribute("src", products[5].image.img);
-let img6 = document.getElementById("myImage6");
-img6.setAttribute("src", products[6].image.img);
-let img7 = document.getElementById("myImage7");
-img7.setAttribute("src", products[7].image.img);
-let img8 = document.getElementById("myImage8");
-img8.setAttribute("src", products[8].image.img);
-let img9 = document.getElementById("myImage9");
-img9.setAttribute("src", products[9].image.img);
+$("#myImage").attr("src", products[0].image.img);
+$("#myImage1").attr("src", products[1].image.img);
+$("#myImage2").attr("src", products[2].image.img);
+$("#myImage3").attr("src", products[3].image.img);
+$("#myImage4").attr("src", products[4].image.img);
+$("#myImage5").attr("src", products[5].image.img);
+$("#myImage6").attr("src", products[6].image.img);
+$("#myImage7").attr("src", products[7].image.img);
+$("#myImage8").attr("src", products[8].image.img);
+$("#myImage9").attr("src", products[9].image.img);
 
 //loopar ut bilderna från arrayen i img taggarna
 
-let cards = document.querySelectorAll("div > #card");
+let cards = $("div > #card");
 
 cards.innerHTML = "hey"; //test
 
@@ -138,29 +130,27 @@ for (var i in products) {
 
 //loopar ut objekten ur arrayen i divvarna.
 
-let checkoutBtn = document.getElementById("checkoutBtn");
-
-checkoutBtn.addEventListener("click", function () {
+$(".checkoutBtn").on("click", function () {
   switchToPage2();
 });
 
 //lägger till ett event när man klickar på checkout knappen
 function switchToPage1() {
-  productspage.style.display = "block";
-  productPage.style.display = "none";
-  checkoutpage.style.display = "none";
+  $("#productsDiv").attr("style", "display: block");
+  $("#checkoutDiv").attr("style", "display: none");
+  $("#productPage").attr("style", "display: none");
 }
 
 function switchToPage2() {
-  productPage.style.display = "none";
-  productspage.style.display = "none";
-  checkoutpage.style.display = "block";
+  $("#productsDiv").attr("style", "display: none");
+  $("#checkoutDiv").attr("style", "display: block");
+  $("#productPage").attr("style", "display: none");
 }
 
 function switchToPage3() {
-  productspage.style.display = "none";
-  productPage.style.display = "block";
-  checkoutpage.style.display = "none";
+  $("#productsDiv").attr("style", "display: none");
+  $("#checkoutDiv").attr("style", "display: none");
+  $("#productPage").attr("style", "display: block");
 }
 //byter mellan divvarna
 
@@ -308,6 +298,7 @@ function validateForm() {
       //Byter till productsDiv
     }, 3000);
   }
+
 }
 
 function producePrompt(message, promptLocation, color) {
@@ -315,6 +306,9 @@ function producePrompt(message, promptLocation, color) {
   document.getElementById(promptLocation).style.color = color;
 }
 
+$("#validateBtn").on("click", function (event) {
+  validateForm();
+})
 //skapar en prompt som visar verifieringen på formet.
 
 // Shopping Cart functions
@@ -434,41 +428,6 @@ var shoppingCart = (function () {
   return obj;
 })();
 
-var addToCartElements = document.querySelectorAll(".add-to-cart");
-addToCartElements.forEach(function (addToCart) {
-  addToCart.addEventListener("click", function (event) {
-    event.preventDefault();
-    var element = event.currentTarget;
-    var name = $(this).attr("data-name");
-    var price = Number($(this).attr("data-price"));
-
-    shoppingCart.addItemToCart(name, price, 1);
-    displayCart();
-  });
-});
-
-var clearCartBtn = document.querySelector("#clear-cart");
-
-clearCartBtn.addEventListener("click", function (event) {
-  shoppingCart.clearCart();
-  displayCart();
-});
-
-/*** With jQuery (refactored for next assignment)*** :
- (".add-to-cart").click(function (event) {
-  event.preventDefault();
-  var name = $(this).attr("data-name");
-  var price = Number($(this).attr("data-price"));
-
-  shoppingCart.addItemToCart(name, price, 1);
-  displayCart();
-});
-
-$("#clear-cart").click(function (event) {
-  shoppingCart.clearCart();
-  displayCart();
-}); **/
-
 function displayCart() {
   var cartArray = shoppingCart.listCart();
   console.log(cartArray);
@@ -499,10 +458,24 @@ function displayCart() {
       "</p>";
   }
 
-  var showCart = document.getElementById("show-cart");
-  showCart.innerHTML = output;
+  $("#show-cart").html(output);
 
-  //With jQuery (OK as per David):
+  $(".add-to-cart").on("click", function (event) {
+    event.preventDefault();
+    var name = $(this).attr("data-name");
+    var price = Number($(this).attr("data-price"));
+
+    shoppingCart.addItemToCart(name, price, 1);
+    displayCart();
+  });
+
+  $("#clear-cart").click(function (event) {
+    shoppingCart.clearCart();
+    displayCart();
+  });
+
+
+
   $(".count-cart").html(shoppingCart.countCart());
   $("#total-cart").html(shoppingCart.totalCart());
 }

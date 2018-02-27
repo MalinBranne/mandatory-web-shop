@@ -67,8 +67,7 @@ a {
 button {
   border: solid black 0.5px;
 }
-#checkoutBtn,
-#clear-cart {
+.roundBtn {
   width: 200px;
   height: 100px;
   margin: 20px;
