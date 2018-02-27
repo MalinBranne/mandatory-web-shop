@@ -144,6 +144,60 @@
 
     </div>
     <!--productsDiv-->
+    <div id="productPage">
+
+
+
+
+        <!-- Review comments from bootstrap exam blog page -->
+
+
+        <div id="display-product" class="col-xs-12 col-sm-6">
+
+        </div>
+
+
+        <script>
+            $(".product").click(function (event) {
+                event.preventDefault();
+                var id = $(this).attr("data-id");
+                let prodData;
+                for (var i = 0; i < products.length; i++) {
+                    if (products[i].id == id) {
+                        prodData = products[i];
+                    }
+                }
+
+
+                displayProduct(prodData);
+                productspage.style.display = "none"; // Bryr mig inte om att detta inte funkar för äldre versioner av IE
+                checkoutpage.style.display = "none";
+                productPage.style.display = "block";
+            });
+
+            function displayProduct(prodData) {
+
+
+                var outputproduct = "";
+
+                outputproduct +=
+
+                    ` <img src="${prodData.image.img}" />
+                    <h3>${prodData.name}</h3>
+                    <h4>$${prodData.price}</h4>
+                    <h4>${prodData.description}</h4>`;
+
+
+
+                var showProduct = document.getElementById("display-product");
+                showProduct.innerHTML = outputproduct;
+
+
+
+            }
+        </script>
+
+    </div>
 
 
     <div class="col-xs-12" id="checkoutDiv">
@@ -266,8 +320,13 @@
 
 
 
+    <!-- 
+Bygg en ny html div som med javascript funktion liknande den som lägg objekt i varukorgen fylls med html från objektet du clickat på. 
 
+Lägg till ett stjärn rating system för varje produkt id
 
+Lägg till reviews för varje produkt id
+ -->
 
 
 

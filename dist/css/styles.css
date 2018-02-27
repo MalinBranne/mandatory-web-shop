@@ -36,6 +36,10 @@ img {
   filter: brightness(110%);
 }
 
+#display-product img {
+  border: solid black 2px;
+}
+
 header img {
   height: 50vh;
 }
@@ -51,6 +55,13 @@ a {
   padding: 5px;
   margin: 20px;
   display: inline-block;
+}
+
+#productPage {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  text-align: center;
 }
 
 button {
