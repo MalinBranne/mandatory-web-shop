@@ -3,8 +3,8 @@ $("#checkoutDiv").attr("style", "display: none");
 $("#productPage").attr("style", "display: none");
 //Dölj checkoutDiv och productPage när man öppnar sidan
 
-let products = [{
-
+let products = [
+  {
     id: "id0",
     name: "Bikini Top",
     price: 500,
@@ -117,8 +117,6 @@ $("#myImage9").attr("src", products[9].image.img);
 
 let cards = $("div > #card");
 
-cards.innerHTML = "hey"; //test
-
 for (var i in products) {
   let p = products[i];
   cards[i].innerHTML = `
@@ -130,7 +128,7 @@ for (var i in products) {
 
 //loopar ut objekten ur arrayen i divvarna.
 
-$(".checkoutBtn").on("click", function () {
+$(".checkoutBtn").on("click", function() {
   switchToPage2();
 });
 
@@ -258,7 +256,8 @@ function validateCity() {
 }
 
 function validateForm() {
-  if (!validateName() ||
+  if (
+    !validateName() ||
     !validateEmail() ||
     !validatePhone() ||
     !validateStreet() ||
@@ -271,13 +270,13 @@ function validateForm() {
       "formPrompt",
       "grey"
     );
-    setTimeout(function () {
+    setTimeout(function() {
       jsHide("formPrompt");
     }, 10000);
   } else {
     jsShow("formPrompt");
     producePrompt("Form Sent", "formPrompt", "green");
-    setTimeout(function () {
+    setTimeout(function() {
       jsHide("namePrompt");
       jsHide("emailPrompt");
       jsHide("phonePrompt");
@@ -298,7 +297,6 @@ function validateForm() {
       //Byter till productsDiv
     }, 3000);
   }
-
 }
 
 function producePrompt(message, promptLocation, color) {
@@ -306,14 +304,14 @@ function producePrompt(message, promptLocation, color) {
   document.getElementById(promptLocation).style.color = color;
 }
 
-$("#validateBtn").on("click", function (event) {
+$("#validateBtn").on("click", function(event) {
   validateForm();
-})
+});
 //skapar en prompt som visar verifieringen på formet.
 
-// Shopping Cart functions
+/***SHOPPING CART***/
 
-var shoppingCart = (function () {
+var shoppingCart = (function() {
   var cart = [];
 
   function Item(name, price, count) {
@@ -337,7 +335,7 @@ var shoppingCart = (function () {
 
   var obj = {};
 
-  obj.addItemToCart = function (name, price, count) {
+  obj.addItemToCart = function(name, price, count) {
     for (var i in cart) {
       if (cart[i].name === name) {
         cart[i].count += count;
@@ -353,7 +351,7 @@ var shoppingCart = (function () {
     saveCart();
   };
 
-  obj.setCountForItem = function (name, count) {
+  obj.setCountForItem = function(name, count) {
     for (var i in cart) {
       if (cart[i].name === name) {
         cart[i].count = count;
@@ -363,7 +361,7 @@ var shoppingCart = (function () {
     saveCart();
   };
 
-  obj.removeItemFromCart = function (name) {
+  obj.removeItemFromCart = function(name) {
     for (var i in cart) {
       if (cart[i].name === name) {
         cart[i].count--;
@@ -376,7 +374,7 @@ var shoppingCart = (function () {
     saveCart();
   };
 
-  obj.removeItemFromCartAll = function (name) {
+  obj.removeItemFromCartAll = function(name) {
     for (var i in cart) {
       if (cart[i].name === name) {
         cart.splice(i, 1);
@@ -386,12 +384,12 @@ var shoppingCart = (function () {
     saveCart();
   };
 
-  obj.clearCart = function () {
+  obj.clearCart = function() {
     cart = [];
     saveCart();
   };
 
-  obj.countCart = function () {
+  obj.countCart = function() {
     var totalCount = 0;
     for (var i in cart) {
       totalCount += cart[i].count;
@@ -400,7 +398,7 @@ var shoppingCart = (function () {
     return totalCount;
   };
 
-  obj.totalCart = function () {
+  obj.totalCart = function() {
     var totalCost = 0;
     for (var i in cart) {
       totalCost += cart[i].price * cart[i].count;
@@ -408,7 +406,7 @@ var shoppingCart = (function () {
     return totalCost.toFixed(2);
   };
 
-  obj.listCart = function () {
+  obj.listCart = function() {
     var cartCopy = [];
     console.log("Listing cart");
     console.log(cart);
@@ -427,6 +425,20 @@ var shoppingCart = (function () {
 
   return obj;
 })();
+
+$(".add-to-cart").on("click", function(event) {
+  event.preventDefault();
+  var name = $(this).attr("data-name");
+  var price = Number($(this).attr("data-price"));
+
+  shoppingCart.addItemToCart(name, price, 1);
+  displayCart();
+});
+
+$("#clear-cart").on("click", function(event) {
+  shoppingCart.clearCart();
+  displayCart();
+});
 
 function displayCart() {
   var cartArray = shoppingCart.listCart();
@@ -460,45 +472,29 @@ function displayCart() {
 
   $("#show-cart").html(output);
 
-  $(".add-to-cart").on("click", function (event) {
-    event.preventDefault();
-    var name = $(this).attr("data-name");
-    var price = Number($(this).attr("data-price"));
-
-    shoppingCart.addItemToCart(name, price, 1);
-    displayCart();
-  });
-
-  $("#clear-cart").click(function (event) {
-    shoppingCart.clearCart();
-    displayCart();
-  });
-
-
-
   $(".count-cart").html(shoppingCart.countCart());
   $("#total-cart").html(shoppingCart.totalCart());
 }
 
-$("#show-cart").on("click", ".delete-item", function (event) {
+$("#show-cart").on("click", ".delete-item", function(event) {
   var name = $(this).attr("data-name");
   shoppingCart.removeItemFromCartAll(name);
   displayCart();
 });
 
-$("#show-cart").on("click", ".subtract-item", function (event) {
+$("#show-cart").on("click", ".subtract-item", function(event) {
   var name = $(this).attr("data-name");
   shoppingCart.removeItemFromCart(name);
   displayCart();
 });
 
-$("#show-cart").on("click", ".plus-item", function (event) {
+$("#show-cart").on("click", ".plus-item", function(event) {
   var name = $(this).attr("data-name");
   shoppingCart.addItemToCart(name, 0, 1);
   displayCart();
 });
 
-$("#show-cart").on("change", ".item-count", function (event) {
+$("#show-cart").on("change", ".item-count", function(event) {
   var name = $(this).attr("data-name");
   var count = Number($(this).val());
   shoppingCart.setCountForItem(name, count);
