@@ -65,6 +65,65 @@ a,
   text-align: center;
 }
 
+#commentsection {
+  margin-top: 60px;
+}
+
+#form {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 1fr 1fr auto auto;
+}
+
+#namelabel {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+input #name {
+  grid-column: 2/3;
+  grid-row: 1/2;
+}
+
+#emaillabel {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+input #email {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+
+#commentlabel {
+  grid-column: 1/2;
+  grid-row: 3/4;
+}
+
+#comment {
+  grid-column: 2/3;
+  grid-row: 3/4;
+}
+
+#commentBtn {
+  margin-top: 10px;
+  margin-bottom: 40px;
+  grid-column: 2/3;
+  grid-row: 4/5;
+  max-width: 50%;
+}
+
+#commentname {
+  font-weight: bold;
+  text-decoration: underline;
+  color: #ffae00;
+}
+
+#commentbox {
+  margin: 5px;
+  padding: 10px;
+  min-height: 50px;
+  text-align: left;
+  border: solid black 0.5px;
+}
 button {
   border: solid black 0.5px;
 }

@@ -148,11 +148,75 @@
         <!-- Review comments from bootstrap exam blog page -->
 
 
-        <div id="display-product" class="col-xs-12 col-sm-6">
+        <div id="display-product" class="col-xs-12 col-sm-5">
 
         </div>
+        <div class="col-xs-12 col-sm-5" id="commentsection">
+            <form id="form" action="javascript:void('');" class="add_comment col-xs-12">
 
+                <label id="namelabel">Name </label>
+                <input id="name" type="string" name="name">
+
+
+                <label id="emaillabel">Email </label>
+                <input id="email" type="string" name="email">
+
+                <br>
+                <label id="commentlabel">Comment</label>
+                <textarea id="comment" name="comment"></textarea>
+
+                <br>
+                <button type="submit" class="btn btn-default" id="commentBtn">Comment</button>
+            </form>
+            <div id="comments" class="col-xs-12"></div>
+        </div>
         <script>
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+            var hh = today.getHours();
+            var min = today.getMinutes();
+            var sec = today.getSeconds();
+
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+
+            today = mm + '/' + dd + '/' + yyyy + '   ' + hh + ':' + min + ':' + sec;
+
+            $(function (prodData) {
+                $("#form").submit(function () {
+                    setTimeout(function () {
+
+                        form.reset();
+                    }, 1000);
+                    // Create data object
+                    var data = {};
+                    data.name = $("#name").val();
+                    data.email = $("#email").val();
+                    data.comment = $("#comment").val();
+                    data.date = today;
+
+                    var response =
+                        `<div id="commentbox">
+                <h5 id="commentname">${data.name}  | ${data.email}</h5>
+                <h4 id="commentpost">${data.comment}</h4>
+                <p id="date">${data.date}</p>
+                </div>
+                `;
+                    // This code executes when the server returns a response
+                    // Do something with the response like adding the comment to the current list of comments
+                    // Example (if your response is HTML, better would be a JSON string):
+                    $("#comments").append(response);
+                });
+
+            });
+
             $(".product >img").click(function (event) {
                 event.preventDefault();
                 var id = $(this).attr("data-id");
