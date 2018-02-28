@@ -152,6 +152,8 @@
 
         </div>
         <div class="col-xs-12 col-sm-5" id="commentsection">
+            <h2>Share your thoughts!</h2>
+
             <form id="form" action="javascript:void('');" class="add_comment col-xs-12">
 
                 <label id="namelabel">Name </label>
@@ -189,33 +191,7 @@
 
             today = mm + '/' + dd + '/' + yyyy + '   ' + hh + ':' + min + ':' + sec;
 
-            $(function (prodData) {
-                $("#form").submit(function () {
-                    setTimeout(function () {
 
-                        form.reset();
-                    }, 1000);
-                    // Create data object
-                    var data = {};
-                    data.name = $("#name").val();
-                    data.email = $("#email").val();
-                    data.comment = $("#comment").val();
-                    data.date = today;
-
-                    var response =
-                        `<div id="commentbox">
-                <h5 id="commentname">${data.name}  | ${data.email}</h5>
-                <h4 id="commentpost">${data.comment}</h4>
-                <p id="date">${data.date}</p>
-                </div>
-                `;
-                    // This code executes when the server returns a response
-                    // Do something with the response like adding the comment to the current list of comments
-                    // Example (if your response is HTML, better would be a JSON string):
-                    $("#comments").append(response);
-                });
-
-            });
 
             $(".product >img").click(function (event) {
                 event.preventDefault();
@@ -251,9 +227,31 @@
                 $("#display-product").html(outputproduct);
 
                 $(".backBtn").click(function (event) {
-
                     switchToPage1();
                 }); // vill tricka på knappen och komma tillbaka till första sidan. Funkar EJ
+
+                $("#form").submit(function () {
+                    setTimeout(function () {
+
+                        form.reset();
+                    }, 1000);
+                    // Create data object
+                    var data = {};
+                    data.name = $("#name").val();
+                    data.email = $("#email").val();
+                    data.comment = $("#comment").val();
+                    data.date = today;
+
+                    var response =
+                        `<div id="commentbox">
+                <h5 id="commentname">${data.name}  | ${data.email}</h5>
+                <h4 id="commentpost">${data.comment}</h4>
+                <p id="date">${data.date}</p>
+                </div>
+                `;
+
+                    $("#comments").append(response);
+                });
 
             }
         </script>

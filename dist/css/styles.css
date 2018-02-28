@@ -156,6 +156,10 @@ h1,
   margin-bottom: 40px;
 }
 
+h2 {
+  margin-bottom: 40px;
+}
+
 .footerDiv {
   display: grid;
   grid-template-columns: 1fr;
