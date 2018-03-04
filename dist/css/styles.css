@@ -188,3 +188,12 @@ footer img {
   font-size: 50px;
   color: white;
 }
+.stars span {
+  color: #b4b4b4;
+  user-select: none;
+  cursor: pointer;
+  font-size: 30px;
+}
+.stars .filled {
+  color: rgb(251, 255, 0);
+}

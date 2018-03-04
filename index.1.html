@@ -229,6 +229,14 @@
                 renderform +=
                     `
 
+                   
+        <div class="stars">
+          <span data-rating-id="1">&#9733;</span>
+          <span data-rating-id="2">&#9733;</span>
+          <span data-rating-id="3">&#9733;</span>
+          <span data-rating-id="4">&#9733;</span>
+          <span data-rating-id="5">&#9733;</span>
+</div>
                 <form id="form" action="javascript:void('');" class="add_comment col-xs-12">
 
                 <label id="namelabel">Name </label>
@@ -249,6 +257,30 @@
             `;
                 $("#commentsection").html(renderform);
 
+                function changeStarRating(rating) {
+                    $(".filled").removeClass("filled");
+                    for (let i = 1; i <= rating; i++) {
+                        ui.stars[i - 1].addClass("filled");
+                    }
+                }
+
+                let ui = {
+
+                    rating: $(".stars"),
+                    stars: [
+                        $("[data-rating-id='1']"),
+                        $("[data-rating-id='2']"),
+                        $("[data-rating-id='3']"),
+                        $("[data-rating-id='4']"),
+                        $("[data-rating-id='5']")
+                    ]
+                };
+
+                ui.rating.on("mouseover", "span", function (e) {
+                    let star = $(e.target);
+                    let rating = parseInt(star.attr("data-rating-id"));
+                    changeStarRating(rating);
+                });
 
                 function render(data) {
                     var review =
