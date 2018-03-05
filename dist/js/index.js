@@ -114,7 +114,9 @@ $("#myImage8").attr("src", products[8].image.img);
 $("#myImage9").attr("src", products[9].image.img);
 
 //loopar ut bilderna från arrayen i img taggarna
+// $(() =>{
 
+// });
 let cards = $("div > #card");
 
 for (var i in products) {
