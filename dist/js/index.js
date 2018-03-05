@@ -556,6 +556,8 @@ $(".product >img").click(function(event) {
   switchToPage3();
 });
 
+/****displayProduct() renderar html och alla funktioner för att displaya och spara kommentarer och ratings****/
+
 function displayProduct(prodData) {
   var com = [];
   if (localStorage.commentData) {
@@ -642,11 +644,6 @@ function displayProduct(prodData) {
     }
   }
 
-  for (var i = 0; i < stars.length; i++) {
-    if (stars.id === prodData.id) {
-      $("#displayStars").html(stars);
-    }
-  }
   $("#commentBtn").click(function() {
     setTimeout(function() {
       form.reset();
