@@ -1,8 +1,9 @@
-$("#productsDiv").attr("style", "display: block"); // Bryr mig inte om att detta inte funkar för äldre versioner av IE
+//start view
+$("#productsDiv").attr("style", "display: block");
 $("#checkoutDiv").attr("style", "display: none");
 $("#productPage").attr("style", "display: none");
-//Dölj checkoutDiv och productPage när man öppnar sidan
 
+/******************************************produkt lista***********************************************' */
 let products = [
   {
     id: "id0",
@@ -130,8 +131,14 @@ for (var i in products) {
 
 //loopar ut objekten ur arrayen i divvarna.
 
-$(".checkoutBtn").on("click", function() {
+/******************************************funktioner för att byta vy***********************************************' */
+
+$(".checkoutBtn").on("click", () => {
   switchToPage2();
+});
+
+$("#brand").on("click", () => {
+  switchToPage1();
 });
 
 //lägger till ett event när man klickar på checkout knappen
@@ -152,7 +159,6 @@ function switchToPage3() {
   $("#checkoutDiv").attr("style", "display: none");
   $("#productPage").attr("style", "display: block");
 }
-//byter mellan divvarna
 
 function jsShow(id) {
   document.getElementById(id).style.display = "block";
@@ -164,7 +170,7 @@ function jsHide(id) {
 
 //funktoner för att dölja/visa saker
 
-//validering för form nedan
+/******************************************validering***********************************************' */
 
 function validateName() {
   let name = document.getElementById("fName").value;
@@ -311,7 +317,7 @@ $("#validateBtn").on("click", function(event) {
 });
 //skapar en prompt som visar verifieringen på formet.
 
-/***SHOPPING CART***/
+/******************************************Shopping cart functions***********************************************' */
 
 var shoppingCart = (function() {
   var cart = [];
@@ -428,6 +434,8 @@ var shoppingCart = (function() {
   return obj;
 })();
 
+/****************************************** Bygger cart***********************************************' */
+
 $(".add-to-cart").on("click", function(event) {
   event.preventDefault();
   var name = $(this).attr("data-name");
@@ -504,3 +512,156 @@ $("#show-cart").on("change", ".item-count", function(event) {
 });
 
 displayCart();
+
+/**************************************datum (till kommentarerna)******************************************' */
+
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth() + 1;
+var yyyy = today.getFullYear();
+var hh = today.getHours();
+var min = today.getMinutes();
+var sec = today.getSeconds();
+
+if (dd < 10) {
+  dd = "0" + dd;
+}
+if (mm < 10) {
+  mm = "0" + mm;
+}
+if (hh < 10) {
+  hh = "0" + hh;
+}
+if (min < 10) {
+  min = "0" + min;
+}
+if (sec < 10) {
+  sec = "0" + sec;
+}
+today = mm + "/" + dd + "/" + yyyy + "   " + hh + ":" + min + ":" + sec;
+
+/**************************************Skapar individuell produkt div******************************************' */
+
+$(".product >img").click(function(event) {
+  event.preventDefault();
+  var id = $(this).attr("data-id");
+  var prodData;
+  for (var i = 0; i < products.length; i++) {
+    if (products[i].id == id) {
+      prodData = products[i];
+    }
+  }
+
+  displayProduct(prodData);
+  switchToPage3();
+});
+
+function displayProduct(prodData) {
+  var com = [];
+  if (localStorage.commentData) {
+    com = JSON.parse(localStorage.commentData);
+  }
+
+  var outputproduct = "";
+
+  outputproduct += `<img src="${prodData.image.img}" />
+        <h3>${prodData.name}</h3>
+        <h4>$${prodData.price}</h4>
+        <h4>${prodData.description}</h4>
+        <button class="backBtn btn btn-default roundBtn">Go Back To Products</button>
+        <div id="comments"></div>`;
+
+  $("#display-product").html(outputproduct);
+
+  $(".backBtn").click(function(event) {
+    switchToPage1();
+  });
+
+  var renderform = "";
+
+  renderform += `  
+<div class="stars" id="${prodData.id}">
+<span data-rating-id="1">&#9733;</span>
+<span data-rating-id="2">&#9733;</span>
+<span data-rating-id="3">&#9733;</span>
+<span data-rating-id="4">&#9733;</span>
+<span data-rating-id="5">&#9733;</span>
+</div>
+<form id="form" action="javascript:void('');" class="add_comment col-xs-12">
+<label id="namelabel">Name </label>
+<input id="name" type="string" name="name">
+<label id="emaillabel">Email </label>
+<input id="cemail" type="string" name="cemail">
+<br>
+<label id="commentlabel">Comment</label>
+<textarea id="comment" name="comment"></textarea>
+<br>
+<button type="submit" class="btn btn-default" id="commentBtn">Comment</button>
+</form> `;
+
+  $("#commentsection").html(renderform);
+
+  function changeStarRating(rating) {
+    $(".filled").removeClass("filled");
+    for (let i = 1; i <= rating; i++) {
+      stars[i - 1].addClass("filled");
+    }
+  }
+
+  var rating = $(".stars");
+  var stars = [
+    $("[data-rating-id='1']"),
+    $("[data-rating-id='2']"),
+    $("[data-rating-id='3']"),
+    $("[data-rating-id='4']"),
+    $("[data-rating-id='5']")
+  ];
+
+  rating.on("mouseover", "span", function(e) {
+    let star = $(e.target);
+    rating = parseInt(star.attr("data-rating-id"));
+    changeStarRating(rating);
+  });
+
+  function render(data) {
+    var review = `<div id="commentbox" data-id="${prodData.id}">
+    <div class="displayStars">${data.rating} <span>&#9733;</span>
+    </div>
+        <h5 id ="commentname">${data.name} | ${data.email}</h5>
+        <h4 id ="commentpost">${data.comment} </h4>
+        <p id="date">${data.date}</p> 
+        </div>
+    `;
+
+    $("#comments").append(review);
+  }
+
+  for (var i = 0; i < com.length; i++) {
+    if (com[i].id === prodData.id) {
+      render(com[i]);
+    }
+  }
+
+  for (var i = 0; i < stars.length; i++) {
+    if (stars.id === prodData.id) {
+      $("#displayStars").html(stars);
+    }
+  }
+  $("#commentBtn").click(function() {
+    setTimeout(function() {
+      form.reset();
+    }, 1000);
+
+    var addCom = {
+      name: $("#name").val(),
+      email: $("#cemail").val(),
+      comment: $("#comment").val(),
+      date: today,
+      id: prodData.id,
+      rating: rating
+    };
+    com.push(addCom);
+    localStorage.commentData = JSON.stringify(com);
+    render(addCom);
+  });
+}

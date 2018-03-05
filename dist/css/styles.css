@@ -197,3 +197,7 @@ footer img {
 .stars .filled {
   color: rgb(251, 255, 0);
 }
+
+.displayStars span {
+  color: rgb(251, 255, 0);
+}
