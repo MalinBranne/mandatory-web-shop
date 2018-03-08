@@ -55,90 +55,31 @@
         <h1 id="header" align="center">Seeing something you love?</h1>
 
         <div class="product">
-
-            <img id="myImage" data-id="id0">
-
-            <div id="card">
-            </div>
-            <button class="add-to-cart btn btn-default" data-name="Bikini Top" data-price="500">ADD TO CART</button>
+            <div class="card" data-id="1"></div>
         </div>
         <div class="product">
-            <img id="myImage1" data-id="id1">
-
-            <div id="card">
-            </div>
-            <button class="add-to-cart btn btn-default" data-name="Bikini Bottom" data-price="500">ADD TO CART</button>
-        </div>
-
-        <div class="product">
-
-            <img id="myImage2" data-id="id2">
-
-            <div id="card">
-            </div>
-            <button class="add-to-cart btn btn-default" data-name="Bikini Full Set" data-price="500">ADD TO CART</button>
+            <div class="card" data-id="2"></div>
         </div>
         <div class="product">
-
-            <img id="myImage3" data-id="id3">
-
-            <div id="card">
-            </div>
-            <button class="add-to-cart btn btn-default" data-name="Bikini Set" data-price="500">ADD TO CART</button>
-        </div>
-
-        <div class="product">
-
-            <img id="myImage4" data-id="id4">
-
-            <div id="card">
-            </div>
-            <button class="add-to-cart btn btn-default" data-name="Bikini Top Blue" data-price="500">ADD TO CART</button>
-        </div>
-
-        <div class="product">
-
-            <img id="myImage5" data-id="id5">
-
-            <div id="card">
-            </div>
-            <button class="add-to-cart btn btn-default" data-name="Bikini Bottom Blue" data-price="500">ADD TO CART</button>
-        </div>
-
-        <div class="product">
-
-            <img id="myImage6" data-id="id6">
-
-            <div id="card">
-            </div>
-            <button class="add-to-cart btn btn-default" data-name="Bikini Full Set Blue" data-price="500">ADD TO CART</button>
+            <div class="card" data-id="3"></div>
         </div>
         <div class="product">
-
-            <img id="myImage7" data-id="id7">
-
-            <div id="card">
-            </div>
-            <button class="add-to-cart btn btn-default" data-name="Bikini Set Blue" data-price="500">ADD TO CART</button>
+            <div class="card" data-id="4"></div>
         </div>
         <div class="product">
-
-            <img id="myImage8" data-id="id8">
-
-            <div id="card">
-            </div>
-            <button class="add-to-cart btn btn-default" data-name="Bikini Set White" data-price="500">ADD TO CART</button>
+            <div iclass="card" data-id="5"></div>
         </div>
         <div class="product">
-
-            <img id="myImage9" data-id="id9">
-
-
-            <div id="card">
-            </div>
-            <button class="add-to-cart btn btn-default" data-name="Bikini Set Gold" data-price="500">ADD TO CART</button>
+            <div class="card" data-id="6"></div>
+        </div>
+        <div class="product">
+            <div class="card" data-id="7"></div>
+        </div>
+        <div class="product">
+            <div class="card" data-id="8"></div>
         </div>
         <br>
+
         <button class="checkoutBtn btn btn-default roundBtn">Check out</button>
 
 
@@ -158,6 +99,87 @@
 
         </div>
         <script>
+            var products1;
+            var myRequest = new XMLHttpRequest();
+            myRequest.open('GET', 'http://demo.edument.se/api/products');
+            myRequest.onload = function () {
+                products1 = JSON.parse(myRequest.responseText);
+
+                renderHTMLtext(products1);
+                console.log(products1);
+            };
+            myRequest.send();
+
+
+            function renderHTMLtext(data) {
+                var HTMLstring = "";
+
+                let cards = $("div > .card");
+
+                for (var i in data) {
+
+                    cards[i].innerHTML =
+                        `
+                        <div class="prodDiv" data-id="${data[i].Id}">
+                        <img src="${data[i].Image}" />
+            <h4>${data[i].Name}</h4>
+            <div>Price: ${data[i].Price}</div>
+           <div>${data[i].Description}</div>
+         
+        
+</div>
+           `;
+                }
+
+                // $("#products").append(HTMLstring);
+
+            }
+            var prodData;
+
+            $(".card").click(function (event) {
+                event.preventDefault();
+                var id = $(this).attr("data-id");
+
+                for (var i = 0; i < products1.length; i++) {
+                    if (products1[i].Id == id) {
+                        prodData = products1[i];
+                    }
+                }
+
+                displayProduct(prodData);
+                switchToPage3();
+            });
+
+
+
+            function displayProduct(prodData) {
+                var outputproduct = "";
+
+                outputproduct +=
+                    `  
+                    <img src="${prodData.Image}" />
+        <h3>${prodData.Name}</h3>
+        <h4>$${prodData.Price}</h4>
+        <h4>${prodData.Description}</h4>
+
+         
+           <a href="${prodData.Url}">${prodData.Url}</a></div>
+            <div data-id="${prodData.Reviews.Id}">
+           <div>${prodData.Reviews.Name}</div>
+           <div>${prodData.Reviews.Comment}</div>
+           <div>${prodData.Reviews.Rating}</div>
+           </div>
+</div>
+        <button class="backBtn btn btn-default roundBtn">Go Back To Products</button>
+        <div id="comments"></div>
+        `;
+
+                $("#display-product").html(outputproduct);
+
+                $(".backBtn").click(function (event) {
+                    switchToPage1();
+                });
+            }
         </script>
 
     </div>
@@ -282,14 +304,6 @@
     <script src="dist/js/index.js"></script>
 
 
-
-    <!-- 
-Bygg en ny html div som med javascript funktion liknande den som lägg objekt i varukorgen fylls med html från objektet du clickat på. 
-
-Lägg till ett stjärn rating system för varje produkt id
-
-Lägg till reviews för varje produkt id
- -->
 
 
 

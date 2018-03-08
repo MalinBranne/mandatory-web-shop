@@ -32,7 +32,12 @@ img {
   height: auto;
 }
 
-#productsDiv img:hover {
+.prodDiv {
+  width: 25%;
+  height: auto;
+}
+
+.prodDiv img:hover {
   filter: brightness(110%);
 }
 
@@ -49,16 +54,7 @@ a,
   cursor: pointer;
 }
 
-.product {
-  width: 200px;
-  height: auto;
-  border: 1px solid black;
-  padding: 5px;
-  margin: 20px;
-  display: inline-block;
-}
-
-#productPage {
+. #productPage {
   display: flex;
   justify-content: center;
   margin: 0 auto;

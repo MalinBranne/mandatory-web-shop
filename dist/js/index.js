@@ -4,130 +4,130 @@ $("#checkoutDiv").attr("style", "display: none");
 $("#productPage").attr("style", "display: none");
 
 /******************************************produkt lista***********************************************' */
-let products = [
-  {
-    id: "id0",
-    name: "Bikini Top",
-    price: 500,
-    description: "Lorem ipsum dolor sit amet, consectetur elit",
-    image: {
-      img: "dist/img/b1.jpg"
-    }
-  },
+// let products = [
+//   {
+//     id: "id0",
+//     name: "Bikini Top",
+//     price: 500,
+//     description: "Lorem ipsum dolor sit amet, consectetur elit",
+//     image: {
+//       img: "dist/img/b1.jpg"
+//     }
+//   },
 
-  {
-    id: "id1",
-    name: "Bikini Bottom",
-    price: 500,
-    description: "Lorem ipsum dolor sit amet, consectetur elit",
-    image: {
-      img: "dist/img/b4.jpg"
-    }
-  },
-  {
-    id: "id2",
-    name: "Bikini Full Set",
-    price: 500,
-    description: "Lorem ipsum dolor sit amet, consectetur elit",
-    image: {
-      img: "dist/img/b2.jpg"
-    }
-  },
+//   {
+//     id: "id1",
+//     name: "Bikini Bottom",
+//     price: 500,
+//     description: "Lorem ipsum dolor sit amet, consectetur elit",
+//     image: {
+//       img: "dist/img/b4.jpg"
+//     }
+//   },
+//   {
+//     id: "id2",
+//     name: "Bikini Full Set",
+//     price: 500,
+//     description: "Lorem ipsum dolor sit amet, consectetur elit",
+//     image: {
+//       img: "dist/img/b2.jpg"
+//     }
+//   },
 
-  {
-    id: "id3",
-    name: "Bikini Set",
-    price: 500,
-    description: "Lorem ipsum dolor sit amet, consectetur elit",
-    image: {
-      img: "dist/img/b3.jpg"
-    }
-  },
-  {
-    id: "id4",
-    name: "Bikini Top Blue",
-    price: 500,
-    description: "Lorem ipsum dolor sit amet, consectetur elit",
-    image: {
-      img: "dist/img/b4.jpg"
-    }
-  },
+//   {
+//     id: "id3",
+//     name: "Bikini Set",
+//     price: 500,
+//     description: "Lorem ipsum dolor sit amet, consectetur elit",
+//     image: {
+//       img: "dist/img/b3.jpg"
+//     }
+//   },
+//   {
+//     id: "id4",
+//     name: "Bikini Top Blue",
+//     price: 500,
+//     description: "Lorem ipsum dolor sit amet, consectetur elit",
+//     image: {
+//       img: "dist/img/b4.jpg"
+//     }
+//   },
 
-  {
-    id: "id5",
-    name: "Bikini Bottom Blue",
-    price: 500,
-    description: "Lorem ipsum dolor sit amet, consectetur elit",
-    image: {
-      img: "dist/img/b1.jpg"
-    }
-  },
-  {
-    id: "id6",
-    name: "Bikini Full Set Blue",
-    price: 500,
-    description: "Lorem ipsum dolor sit amet, consectetur elit",
-    image: {
-      img: "dist/img/b2.jpg"
-    }
-  },
+//   {
+//     id: "id5",
+//     name: "Bikini Bottom Blue",
+//     price: 500,
+//     description: "Lorem ipsum dolor sit amet, consectetur elit",
+//     image: {
+//       img: "dist/img/b1.jpg"
+//     }
+//   },
+//   {
+//     id: "id6",
+//     name: "Bikini Full Set Blue",
+//     price: 500,
+//     description: "Lorem ipsum dolor sit amet, consectetur elit",
+//     image: {
+//       img: "dist/img/b2.jpg"
+//     }
+//   },
 
-  {
-    id: "id7",
-    name: "Bikini Set Blue",
-    price: 500,
-    description: "Lorem ipsum dolor sit amet, consectetur elit",
-    image: {
-      img: "dist/img/b3.jpg"
-    }
-  },
-  {
-    id: "id8",
-    name: "Bikini Set White",
-    price: 500,
-    description: "Lorem ipsum dolor sit amet, consectetur elit",
-    image: {
-      img: "dist/img/b4.jpg"
-    }
-  },
-  {
-    id: "id9",
-    name: "Bikini Set Gold",
-    price: 500,
-    description: "Lorem ipsum dolor sit amet, consectetur elit",
-    image: {
-      img: "dist/img/b1.jpg"
-    }
-  }
-];
+//   {
+//     id: "id7",
+//     name: "Bikini Set Blue",
+//     price: 500,
+//     description: "Lorem ipsum dolor sit amet, consectetur elit",
+//     image: {
+//       img: "dist/img/b3.jpg"
+//     }
+//   },
+//   {
+//     id: "id8",
+//     name: "Bikini Set White",
+//     price: 500,
+//     description: "Lorem ipsum dolor sit amet, consectetur elit",
+//     image: {
+//       img: "dist/img/b4.jpg"
+//     }
+//   },
+//   {
+//     id: "id9",
+//     name: "Bikini Set Gold",
+//     price: 500,
+//     description: "Lorem ipsum dolor sit amet, consectetur elit",
+//     image: {
+//       img: "dist/img/b1.jpg"
+//     }
+//   }
+// ];
 
-// array av objekt som innehåller produkter
+// // array av objekt som innehåller produkter
 
-$("#myImage").attr("src", products[0].image.img);
-$("#myImage1").attr("src", products[1].image.img);
-$("#myImage2").attr("src", products[2].image.img);
-$("#myImage3").attr("src", products[3].image.img);
-$("#myImage4").attr("src", products[4].image.img);
-$("#myImage5").attr("src", products[5].image.img);
-$("#myImage6").attr("src", products[6].image.img);
-$("#myImage7").attr("src", products[7].image.img);
-$("#myImage8").attr("src", products[8].image.img);
-$("#myImage9").attr("src", products[9].image.img);
+// $("#myImage").attr("src", products[0].image.img);
+// $("#myImage1").attr("src", products[1].image.img);
+// $("#myImage2").attr("src", products[2].image.img);
+// $("#myImage3").attr("src", products[3].image.img);
+// $("#myImage4").attr("src", products[4].image.img);
+// $("#myImage5").attr("src", products[5].image.img);
+// $("#myImage6").attr("src", products[6].image.img);
+// $("#myImage7").attr("src", products[7].image.img);
+// $("#myImage8").attr("src", products[8].image.img);
+// $("#myImage9").attr("src", products[9].image.img);
 
 //loopar ut bilderna från arrayen i img taggarna
 // $(() =>{
 
 // });
-let cards = $("div > #card");
+// let cards = $("div > #card");
 
-for (var i in products) {
-  let p = products[i];
-  cards[i].innerHTML = `
-    <h4>${p.name}</h4>
-    <div>Price: ${p.price}</div>
-    <div>${p.description}</div>
-  `;
-}
+// for (var i in products) {
+//   let p = products[i];
+//   cards[i].innerHTML = `
+//     <h4>${p.name}</h4>
+//     <div>Price: ${p.price}</div>
+//     <div>${p.description}</div>
+//   `;
+// }
 
 //loopar ut objekten ur arrayen i divvarna.
 
@@ -550,42 +550,42 @@ today = mm + "/" + dd + "/" + yyyy + "   " + hh + ":" + min + ":" + sec;
 
 /**************************************Skapar individuell produkt div******************************************' */
 
-$(".product >img").click(function(event) {
-  event.preventDefault();
-  var id = $(this).attr("data-id");
-  var prodData;
-  for (var i = 0; i < products.length; i++) {
-    if (products[i].id == id) {
-      prodData = products[i];
-    }
-  }
+// $(".product >img").click(function(event) {
+//   event.preventDefault();
+//   var id = $(this).attr("data-id");
+//   var prodData;
+//   for (var i = 0; i < products.length; i++) {
+//     if (products[i].id == id) {
+//       prodData = products[i];
+//     }
+//   }
 
-  displayProduct(prodData);
-  switchToPage3();
-});
+//   displayProduct(prodData);
+//   switchToPage3();
+// });
 
 /****displayProduct() renderar html och alla funktioner för att displaya och spara kommentarer och ratings****/
 
-function displayProduct(prodData) {
+function displayProducts(prodData) {
   var com = [];
   if (localStorage.commentData) {
     com = JSON.parse(localStorage.commentData);
   }
 
-  var outputproduct = "";
+  // var outputproduct = "";
 
-  outputproduct += `<img src="${prodData.image.img}" />
-        <h3>${prodData.name}</h3>
-        <h4>$${prodData.price}</h4>
-        <h4>${prodData.description}</h4>
-        <button class="backBtn btn btn-default roundBtn">Go Back To Products</button>
-        <div id="comments"></div>`;
+  // outputproduct += `<img src="${prodData.image.img}" />
+  //       <h3>${prodData.name}</h3>
+  //       <h4>$${prodData.price}</h4>
+  //       <h4>${prodData.description}</h4>
+  //       <button class="backBtn btn btn-default roundBtn">Go Back To Products</button>
+  //       <div id="comments"></div>`;
 
-  $("#display-product").html(outputproduct);
+  // $("#display-product").html(outputproduct);
 
-  $(".backBtn").click(function(event) {
-    switchToPage1();
-  });
+  // $(".backBtn").click(function(event) {
+  //   switchToPage1();
+  // });
 
   var renderform = "";
 
