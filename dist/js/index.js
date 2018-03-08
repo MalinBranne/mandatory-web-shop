@@ -457,9 +457,13 @@ function displayCart() {
 
   for (var i in cartArray) {
     output +=
-      "<p>" +
+      "<div id='cartCheckout'>" +
+      "<table>" +
+      "<td id='tdname'>" +
       cartArray[i].name +
-      " <input class='item-count' type='number' data-name='" +
+      "</td>" +
+      "<td id='tdcountprice'>" +
+      " <input class='item-count styleCartInput' type='number' data-name='" +
       cartArray[i].name +
       "' value='" +
       cartArray[i].count +
@@ -468,16 +472,20 @@ function displayCart() {
       cartArray[i].price +
       " = " +
       cartArray[i].total +
-      " <button class='plus-item' data-name='" +
+      "</td>" +
+      "<td>" +
+      " <button class='btn btn-default plus-item' data-name='" +
       cartArray[i].name +
       "'>+</button>" +
-      " <button class='subtract-item' data-name='" +
+      " <button class='btn btn-default subtract-item' data-name='" +
       cartArray[i].name +
       "'>-</button>" +
-      " <button class='delete-item' data-name='" +
+      " <button class='btn btn-default delete-item' data-name='" +
       cartArray[i].name +
       "'>X</button>" +
-      "</p>";
+      "</td>" +
+      "</table>" +
+      "</div>";
   }
 
   $("#show-cart").html(output);

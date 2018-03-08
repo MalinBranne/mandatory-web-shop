@@ -135,9 +135,15 @@ button {
 }
 
 #shoppingcart1 {
-  padding: 40px;
+  margin-top: 40px;
+  padding: 20px;
+  padding: 5px;
   display: grid;
   grid-template-rows: 2fr 1fr;
+}
+
+#totalCartItems {
+  padding: 10px;
 }
 
 #formDiv {
@@ -194,10 +200,19 @@ footer img {
   cursor: pointer;
   font-size: 30px;
 }
-.stars .filled {
+.stars .filled,
+.displayStars span {
   color: rgb(251, 255, 0);
 }
 
-.displayStars span {
-  color: rgb(251, 255, 0);
+.styleCartInput {
+  max-width: 40px;
+}
+
+#tdname {
+  width: 120px;
+}
+
+#tdcountprice {
+  width: 180px;
 }
