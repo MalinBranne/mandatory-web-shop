@@ -118,7 +118,7 @@ $("#productPage").attr("style", "display: none");
 // $(() =>{
 
 // });
-// let cards = $("div > #card");
+let cards = $("div > #card");
 
 // for (var i in products) {
 //   let p = products[i];
@@ -314,6 +314,12 @@ function producePrompt(message, promptLocation, color) {
 
 $("#validateBtn").on("click", function(event) {
   validateForm();
+  cart = [];
+
+  fetch("http://demo.edument.se/api/orders")
+    .then(response => response.json())
+    .then(products => console.log("fetch completed", products))
+    .catch(err => console.log(err));
 });
 //skapar en prompt som visar verifieringen på formet.
 

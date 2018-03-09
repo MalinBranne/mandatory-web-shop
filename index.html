@@ -115,19 +115,23 @@
 
         </div>
         <script>
-            var products1;
-            var myRequest = new XMLHttpRequest();
-            myRequest.open('GET', 'http://demo.edument.se/api/products');
-            myRequest.onload = function () {
-                products1 = JSON.parse(myRequest.responseText);
+            fetch('http://demo.edument.se/api/products')
+                .then(response => response.json())
+                .then(data => {
+                    var products = data;
+                    console.log(products, "hey");
+                    renderHTMLtext(products);
 
-                renderHTMLtext(products1);
-                console.log(products1);
-            };
-            myRequest.send();
+
+                });
+
+
+
+
 
 
             function renderHTMLtext(data) {
+
                 var HTMLstring = "";
 
                 let cards = $(".card");
@@ -136,34 +140,41 @@
 
                     cards[i].innerHTML =
                         `
-                        <div class="prodDiv" data-id="${data[i].Id}">
-                        <img src="${data[i].Image}" />
+            <div class="prodDiv" data-id="${data[i].Id}">
+            <img src="${data[i].Image}" />
             <h4>${data[i].Name}</h4>
             <div>Price: ${data[i].Price}</div>
-           <div>${data[i].Description}</div>
-   
-        
-</div>
+            <div>${data[i].Description}</div>
+            </div>
            `;
                 }
-
-                // $("#products").append(HTMLstring);
-
             }
+
+
             var prodData;
 
             $(".card").click(function (event) {
-                event.preventDefault();
                 var id = $(this).attr("data-id");
+                fetch('http://demo.edument.se/api/products')
+                    .then(response => response.json())
+                    .then(data => {
+                        var products = data;
+                        console.log(products, "hey hoooe");
+                        event.preventDefault();
 
-                for (var i = 0; i < products1.length; i++) {
-                    if (products1[i].Id == id) {
-                        prodData = products1[i];
-                    }
-                }
 
-                displayProduct(prodData);
-                switchToPage3();
+                        for (var i = 0; i < products.length; i++) {
+                            if (products[i].Id == id) {
+                                prodData = products[i];
+                            }
+                        }
+
+
+
+
+                        displayProduct(prodData);
+                        switchToPage3();
+                    });
             });
 
 
@@ -293,6 +304,11 @@
             <button id="validateBtn" class="btn btn-default roundBtn">Confirm</button>
 
             <label id="formPrompt"> </label>
+
+
+
+            <script>
+            </script>
         </div>
 
     </div>
