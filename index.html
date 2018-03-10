@@ -94,6 +94,7 @@
             <div class="card" data-id="8"></div>
             <button class="add-to-cart btn btn-default" data-name="Product_#8" data-price="90.72">ADD TO CART</button>
         </div>
+
         <br>
 
         <button class="checkoutBtn btn btn-default roundBtn">Check out</button>
@@ -154,7 +155,7 @@
             var prodData;
 
             $(".card").click(function (event) {
-                var id = $(this).attr("data-id");
+
                 fetch('http://demo.edument.se/api/products')
                     .then(response => response.json())
                     .then(data => {
@@ -162,7 +163,7 @@
                         console.log(products, "hey hoooe");
                         event.preventDefault();
 
-
+                        var id = $(this).attr("data-id");
                         for (var i = 0; i < products.length; i++) {
                             if (products[i].Id == id) {
                                 prodData = products[i];
@@ -229,14 +230,14 @@
 
                 $("#commentsection").html(renderform);
 
-                function changeStarRating(rating) {
+                function changeStarRating(Rating) {
                     $(".filled").removeClass("filled");
-                    for (let i = 1; i <= rating; i++) {
+                    for (let i = 1; i <= Rating; i++) {
                         stars[i - 1].addClass("filled");
                     }
                 }
 
-                var rating = $(".stars");
+                var Rating = $(".stars");
                 var stars = [
                     $("[data-rating-id='1']"),
                     $("[data-rating-id='2']"),
@@ -245,39 +246,37 @@
                     $("[data-rating-id='5']")
                 ];
 
-                rating.on("mouseover", "span", function (e) {
+                Rating.on("mouseover", "span", function (e) {
                     let star = $(e.target);
-                    rating = parseInt(star.attr("data-rating-id"));
-                    changeStarRating(rating);
+                    Rating = parseInt(star.attr("data-rating-id"));
+                    changeStarRating(Rating);
                 });
 
-                renderReviews(prodData.Id);
 
-            }
-            /***************Del 2 Nedan***********/
+                /***************Del 2 Nedan***********/
 
-            fetch('https://demo.edument.se/api/reviews')
-                .then(response => response.json())
-                .then(reviews => {
-                    com = reviews;
-                })
-                .catch(err => console.log(err));
-            //this is where shopping cart, products and reviews are "saved"
+                fetch('https://demo.edument.se/api/reviews')
+                    .then(response => response.json())
+                    .then(reviews => {
+                        com = reviews;
+                    })
+                    .catch(err => console.log(err));
+                //this is where shopping cart, products and reviews are "saved"
 
 
 
 
 
 
-            function renderReviews(prodData) {
-                reviewWrapper = $('#comments');
-                reviewWrapper.empty();
-                const reviews = com.filter(review => (review.ProductID === prodData));
+                function renderReviews(prodData) {
+                    reviewWrapper = $('#comments');
 
-                reviews.map((review) => {
+                    const reviews = com.filter(review => (review.ProductID === prodData));
 
-                    reviewWrapper.append(
-                        `<div id="commentbox" data-id="${review.Id}">
+                    reviews.map((review) => {
+
+                        reviewWrapper.append(
+                            `<div id="commentbox" data-id="${review.Id}">
                                 <div class="displayStars">${review.Rating} <span>&#9733;</span>
                                 </div>
                                     <h5 id ="commentname">${review.Name} | ${review.Email}</h5>
@@ -285,40 +284,60 @@
                                    
                                     </div>
                                 `
-                    )
+                        )
 
-                })
+                    })
+
+
+                }
+
+
+                function postReview(review) {
+                    return fetch('https://demo.edument.se/api/reviews', {
+                        method: 'POST',
+                        body: JSON.stringify(review),
+                        headers: new Headers({
+                            'Content-Type': 'application/json'
+                        })
+                    });
+                }
+
+
+
+                $("#commentBtn").click(function () {
+                    setTimeout(function () {
+                        form.reset();
+                    }, 1000);
+
+                    console.log("btn pressed");
+
+                    addReview(prodData);
+                    console.log(com);
+
+                });
+
+                function addReview(prodData) {
+                    const newReview = {
+
+                        ProductID: prodData.Id,
+                        Name: $("#name").val(),
+                        Email: $("#cemail").val(),
+                        Comment: $("#comment").val(),
+                        Rating: Rating
+                    };
+
+
+                    postReview(newReview);
+                    com.push(newReview); //this is to make the new review
+                    renderReviews(prodData.Id); //måste ha.Id
+
+                }
+
+                renderReviews(prodData.Id);
+                //två första .Id funkar. typ. reviews displays när man submittar en ny review.
+
 
             }
-
-            // function postReview(review) {
-            //     return fetch('https://demo.edument.se/api/reviews', {
-            //         method: 'POST',
-            //         body: JSON.stringify(review),
-            //         headers: new Headers({
-            //             'Content-Type': 'application/json'
-            //         })
-            //     });
-
-
-
-            //     function addReview(productId) {
-            //         const newReview = {
-            //             ProductID: productId,
-            //             Name: $('input[name=nameField]').val(),
-            //             Comment: $('input[name=reviewField]').val(),
-            //             Rating: parseInt($('#rating').val()),
-            //         };
-
-            //         $('input[name=nameField]').val("");
-            //         $('input[name=ratingField]').val("");
-            //         $('input[name=reviewField]').val("");
-
-            //         postReview(newReview);
-            //         appState.Reviews.push(newReview); //this is to make the new review
-            //         renderReviews(productId); //appear directly to the page, without reloading
-
-            //     };
         </script>
 
     </div>

@@ -653,21 +653,21 @@ today = mm + "/" + dd + "/" + yyyy + "   " + hh + ":" + min + ":" + sec;
 //   }
 // }
 
-//   $("#commentBtn").click(function() {
-//     setTimeout(function() {
-//       form.reset();
-//     }, 1000);
+// $("#commentBtn").click(function() {
+//   setTimeout(function() {
+//     form.reset();
+//   }, 1000);
 
-//     var addCom = {
-//       name: $("#name").val(),
-//       email: $("#cemail").val(),
-//       comment: $("#comment").val(),
-//       date: today,
-//       id: prodData.id,
-//       rating: rating
-//     };
-//     com.push(addCom);
-//     localStorage.commentData = JSON.stringify(com);
-//     render(addCom);
-//   });
+//   var addCom = {
+//     name: $("#name").val(),
+//     email: $("#cemail").val(),
+//     comment: $("#comment").val(),
+//     date: today,
+//     id: prodData.id,
+//     rating: rating
+//   };
+//   com.push(addCom);
+//   localStorage.commentData = JSON.stringify(com);
+//   render(addCom);
+// });
 // }
