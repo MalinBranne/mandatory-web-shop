@@ -315,11 +315,6 @@ function producePrompt(message, promptLocation, color) {
 $("#validateBtn").on("click", function(event) {
   validateForm();
   cart = [];
-
-  fetch("http://demo.edument.se/api/orders")
-    .then(response => response.json())
-    .then(products => console.log("fetch completed", products))
-    .catch(err => console.log(err));
 });
 //skapar en prompt som visar verifieringen på formet.
 
@@ -572,107 +567,107 @@ today = mm + "/" + dd + "/" + yyyy + "   " + hh + ":" + min + ":" + sec;
 
 /****displayProduct() renderar html och alla funktioner för att displaya och spara kommentarer och ratings****/
 
-function displayProducts(prodData) {
-  var com = [];
-  if (localStorage.commentData) {
-    com = JSON.parse(localStorage.commentData);
-  }
+// function displayProduct(prodData) {
+//   var com = [];
+//   if (localStorage.commentData) {
+//     com = JSON.parse(localStorage.commentData);
+//   }
 
-  // var outputproduct = "";
+//   // var outputproduct = "";
 
-  // outputproduct += `<img src="${prodData.image.img}" />
-  //       <h3>${prodData.name}</h3>
-  //       <h4>$${prodData.price}</h4>
-  //       <h4>${prodData.description}</h4>
-  //       <button class="backBtn btn btn-default roundBtn">Go Back To Products</button>
-  //       <div id="comments"></div>`;
+//   // outputproduct += `<img src="${prodData.image.img}" />
+//   //       <h3>${prodData.name}</h3>
+//   //       <h4>$${prodData.price}</h4>
+//   //       <h4>${prodData.description}</h4>
+//   //       <button class="backBtn btn btn-default roundBtn">Go Back To Products</button>
+//   //       <div id="comments"></div>`;
 
-  // $("#display-product").html(outputproduct);
+//   // $("#display-product").html(outputproduct);
 
-  // $(".backBtn").click(function(event) {
-  //   switchToPage1();
-  // });
+//   // $(".backBtn").click(function(event) {
+//   //   switchToPage1();
+//   // });
 
-  var renderform = "";
+//   var renderform = "";
 
-  renderform += `  
-<div class="stars" id="${prodData.id}">
-<span data-rating-id="1">&#9733;</span>
-<span data-rating-id="2">&#9733;</span>
-<span data-rating-id="3">&#9733;</span>
-<span data-rating-id="4">&#9733;</span>
-<span data-rating-id="5">&#9733;</span>
-</div>
-<form id="form" action="javascript:void('');" class="add_comment col-xs-12">
-<label id="namelabel">Name </label>
-<input id="name" type="string" name="name">
-<label id="emaillabel">Email </label>
-<input id="cemail" type="string" name="cemail">
-<br>
-<label id="commentlabel">Comment</label>
-<textarea id="comment" name="comment"></textarea>
-<br>
-<button type="submit" class="btn btn-default" id="commentBtn">Comment</button>
-</form> `;
+//   renderform += `
+// <div class="stars" id="${prodData.id}">
+// <span data-rating-id="1">&#9733;</span>
+// <span data-rating-id="2">&#9733;</span>
+// <span data-rating-id="3">&#9733;</span>
+// <span data-rating-id="4">&#9733;</span>
+// <span data-rating-id="5">&#9733;</span>
+// </div>
+// <form id="form" action="javascript:void('');" class="add_comment col-xs-12">
+// <label id="namelabel">Name </label>
+// <input id="name" type="string" name="name">
+// <label id="emaillabel">Email </label>
+// <input id="cemail" type="string" name="cemail">
+// <br>
+// <label id="commentlabel">Comment</label>
+// <textarea id="comment" name="comment"></textarea>
+// <br>
+// <button type="submit" class="btn btn-default" id="commentBtn">Comment</button>
+// </form> `;
 
-  $("#commentsection").html(renderform);
+//   $("#commentsection").html(renderform);
 
-  function changeStarRating(rating) {
-    $(".filled").removeClass("filled");
-    for (let i = 1; i <= rating; i++) {
-      stars[i - 1].addClass("filled");
-    }
-  }
+//   function changeStarRating(rating) {
+//     $(".filled").removeClass("filled");
+//     for (let i = 1; i <= rating; i++) {
+//       stars[i - 1].addClass("filled");
+//     }
+//   }
 
-  var rating = $(".stars");
-  var stars = [
-    $("[data-rating-id='1']"),
-    $("[data-rating-id='2']"),
-    $("[data-rating-id='3']"),
-    $("[data-rating-id='4']"),
-    $("[data-rating-id='5']")
-  ];
+//   var rating = $(".stars");
+//   var stars = [
+//     $("[data-rating-id='1']"),
+//     $("[data-rating-id='2']"),
+//     $("[data-rating-id='3']"),
+//     $("[data-rating-id='4']"),
+//     $("[data-rating-id='5']")
+//   ];
 
-  rating.on("mouseover", "span", function(e) {
-    let star = $(e.target);
-    rating = parseInt(star.attr("data-rating-id"));
-    changeStarRating(rating);
-  });
+//   rating.on("mouseover", "span", function(e) {
+//     let star = $(e.target);
+//     rating = parseInt(star.attr("data-rating-id"));
+//     changeStarRating(rating);
+//   });
 
-  function render(data) {
-    var review = `<div id="commentbox" data-id="${prodData.id}">
-    <div class="displayStars">${data.rating} <span>&#9733;</span>
-    </div>
-        <h5 id ="commentname">${data.name} | ${data.email}</h5>
-        <h4 id ="commentpost">${data.comment} </h4>
-        <p id="date">${data.date}</p> 
-        </div>
-    `;
+// function render(data) {
+//   var review = `<div id="commentbox" data-id="${prodData.id}">
+//     <div class="displayStars">${data.rating} <span>&#9733;</span>
+//     </div>
+//         <h5 id ="commentname">${data.name} | ${data.email}</h5>
+//         <h4 id ="commentpost">${data.comment} </h4>
+//         <p id="date">${data.date}</p>
+//         </div>
+//     `;
 
-    $("#comments").append(review);
-  }
+//   $("#comments").append(review);
+// }
 
-  for (var i = 0; i < com.length; i++) {
-    if (com[i].id === prodData.id) {
-      render(com[i]);
-    }
-  }
+// for (var i = 0; i < com.length; i++) {
+//   if (com[i].id === prodData.id) {
+//     render(com[i]);
+//   }
+// }
 
-  $("#commentBtn").click(function() {
-    setTimeout(function() {
-      form.reset();
-    }, 1000);
+//   $("#commentBtn").click(function() {
+//     setTimeout(function() {
+//       form.reset();
+//     }, 1000);
 
-    var addCom = {
-      name: $("#name").val(),
-      email: $("#cemail").val(),
-      comment: $("#comment").val(),
-      date: today,
-      id: prodData.id,
-      rating: rating
-    };
-    com.push(addCom);
-    localStorage.commentData = JSON.stringify(com);
-    render(addCom);
-  });
-}
+//     var addCom = {
+//       name: $("#name").val(),
+//       email: $("#cemail").val(),
+//       comment: $("#comment").val(),
+//       date: today,
+//       id: prodData.id,
+//       rating: rating
+//     };
+//     com.push(addCom);
+//     localStorage.commentData = JSON.stringify(com);
+//     render(addCom);
+//   });
+// }

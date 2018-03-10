@@ -56,43 +56,43 @@
 
         <div class="product">
             <div class="card" data-id="1"></div>
-            <button class="add-to-cart btn btn-default" data-name="Product_#1" data-price="500">ADD TO CART</button>
+            <button class="add-to-cart btn btn-default" data-name="Product_#1" data-price="12.02">ADD TO CART</button>
         </div>
 
 
         <div class="product">
             <div class="card" data-id="2"></div>
-            <button class="add-to-cart btn btn-default" data-name="Product_#2" data-price="500">ADD TO CART</button>
+            <button class="add-to-cart btn btn-default" data-name="Product_#2" data-price="29.57">ADD TO CART</button>
         </div>
 
         <div class="product">
             <div class="card" data-id="3"></div>
-            <button class="add-to-cart btn btn-default" data-name="Product_#3" data-price="500">ADD TO CART</button>
+            <button class="add-to-cart btn btn-default" data-name="Product_#3" data-price="14.98">ADD TO CART</button>
         </div>
 
         <div class="product">
             <div class="card" data-id="4"></div>
-            <button class="add-to-cart btn btn-default" data-name="Product_#4" data-price="500">ADD TO CART</button>
+            <button class="add-to-cart btn btn-default" data-name="Product_#4" data-price="9.95">ADD TO CART</button>
         </div>
 
         <div class="product">
             <div class="card" data-id="5"></div>
-            <button class="add-to-cart btn btn-default" data-name="Product_#5" data-price="500">ADD TO CART</button>
+            <button class="add-to-cart btn btn-default" data-name="Product_#5" data-price="12.72">ADD TO CART</button>
         </div>
 
         <div class="product">
             <div class="card" data-id="6"></div>
-            <button class="add-to-cart btn btn-default" data-name="Product_#6" data-price="500">ADD TO CART</button>
+            <button class="add-to-cart btn btn-default" data-name="Product_#6" data-price="9.95">ADD TO CART</button>
         </div>
 
         <div class="product">
             <div class="card" data-id="7"></div>
-            <button class="add-to-cart btn btn-default" data-name="Product_#7" data-price="500">ADD TO CART</button>
+            <button class="add-to-cart btn btn-default" data-name="Product_#7" data-price="8.95">ADD TO CART</button>
         </div>
 
         <div class="product">
             <div class="card" data-id="8"></div>
-            <button class="add-to-cart btn btn-default" data-name="Product_#8" data-price="500">ADD TO CART</button>
+            <button class="add-to-cart btn btn-default" data-name="Product_#8" data-price="90.72">ADD TO CART</button>
         </div>
         <br>
 
@@ -115,20 +115,17 @@
 
         </div>
         <script>
+            /*************Del 1 Nedan**************/
             fetch('http://demo.edument.se/api/products')
                 .then(response => response.json())
                 .then(data => {
+
                     var products = data;
                     console.log(products, "hey");
                     renderHTMLtext(products);
 
 
                 });
-
-
-
-
-
 
             function renderHTMLtext(data) {
 
@@ -151,6 +148,9 @@
             }
 
 
+            //Måste göra fetch igen för att individuell product page ska funka. Hur kan man göra det bättre?
+            // Om man bara gör fetch en gång så blir products undefined utanför den fetch funktionen.
+
             var prodData;
 
             $(".card").click(function (event) {
@@ -169,9 +169,6 @@
                             }
                         }
 
-
-
-
                         displayProduct(prodData);
                         switchToPage3();
                     });
@@ -180,6 +177,12 @@
 
 
             function displayProduct(prodData) {
+
+                var com = [];
+
+                if (localStorage.commentData) {
+                    com = JSON.parse(localStorage.commentData);
+                }
                 var outputproduct = "";
 
                 outputproduct +=
@@ -189,14 +192,8 @@
         <h4>$${prodData.Price}</h4>
         <h4>${prodData.Description}</h4>
 
-         
-           <a href="${prodData.Url}">${prodData.Url}</a></div>
-            <div data-id="${prodData.Reviews.Id}">
-           <div>${prodData.Reviews.Name}</div>
-           <div>${prodData.Reviews.Comment}</div>
-           <div>${prodData.Reviews.Rating}</div>
-           </div>
-</div>
+    <a href="${prodData.Url}">${prodData.Url}</a> 
+    <br>
         <button class="backBtn btn btn-default roundBtn">Go Back To Products</button>
         <div id="comments"></div>
         `;
@@ -206,7 +203,122 @@
                 $(".backBtn").click(function (event) {
                     switchToPage1();
                 });
+
+                var renderform = "";
+
+                renderform +=
+                    `
+<div class="stars" id="${prodData.id}">
+<span data-rating-id="1">&#9733;</span>
+<span data-rating-id="2">&#9733;</span>
+<span data-rating-id="3">&#9733;</span>
+<span data-rating-id="4">&#9733;</span>
+<span data-rating-id="5">&#9733;</span>
+</div>
+<form id="form" action="javascript:void('');" class="add_comment col-xs-12">
+<label id="namelabel">Name </label>
+<input id="name" type="string" name="name">
+<label id="emaillabel">Email </label>
+<input id="cemail" type="string" name="cemail">
+<br>
+<label id="commentlabel">Comment</label>
+<textarea id="comment" name="comment"></textarea>
+<br>
+<button type="submit" class="btn btn-default" id="commentBtn">Comment</button>
+</form> `;
+
+                $("#commentsection").html(renderform);
+
+                function changeStarRating(rating) {
+                    $(".filled").removeClass("filled");
+                    for (let i = 1; i <= rating; i++) {
+                        stars[i - 1].addClass("filled");
+                    }
+                }
+
+                var rating = $(".stars");
+                var stars = [
+                    $("[data-rating-id='1']"),
+                    $("[data-rating-id='2']"),
+                    $("[data-rating-id='3']"),
+                    $("[data-rating-id='4']"),
+                    $("[data-rating-id='5']")
+                ];
+
+                rating.on("mouseover", "span", function (e) {
+                    let star = $(e.target);
+                    rating = parseInt(star.attr("data-rating-id"));
+                    changeStarRating(rating);
+                });
+
+                renderReviews(prodData.Id);
+
             }
+            /***************Del 2 Nedan***********/
+
+            fetch('https://demo.edument.se/api/reviews')
+                .then(response => response.json())
+                .then(reviews => {
+                    com = reviews;
+                })
+                .catch(err => console.log(err));
+            //this is where shopping cart, products and reviews are "saved"
+
+
+
+
+
+
+            function renderReviews(prodData) {
+                reviewWrapper = $('#comments');
+                reviewWrapper.empty();
+                const reviews = com.filter(review => (review.ProductID === prodData));
+
+                reviews.map((review) => {
+
+                    reviewWrapper.append(
+                        `<div id="commentbox" data-id="${review.Id}">
+                                <div class="displayStars">${review.Rating} <span>&#9733;</span>
+                                </div>
+                                    <h5 id ="commentname">${review.Name} | ${review.Email}</h5>
+                                    <h4 id ="commentpost">${review.Comment} </h4>
+                                   
+                                    </div>
+                                `
+                    )
+
+                })
+
+            }
+
+            // function postReview(review) {
+            //     return fetch('https://demo.edument.se/api/reviews', {
+            //         method: 'POST',
+            //         body: JSON.stringify(review),
+            //         headers: new Headers({
+            //             'Content-Type': 'application/json'
+            //         })
+            //     });
+
+
+
+            //     function addReview(productId) {
+            //         const newReview = {
+            //             ProductID: productId,
+            //             Name: $('input[name=nameField]').val(),
+            //             Comment: $('input[name=reviewField]').val(),
+            //             Rating: parseInt($('#rating').val()),
+            //         };
+
+            //         $('input[name=nameField]').val("");
+            //         $('input[name=ratingField]').val("");
+            //         $('input[name=reviewField]').val("");
+
+            //         postReview(newReview);
+            //         appState.Reviews.push(newReview); //this is to make the new review
+            //         renderReviews(productId); //appear directly to the page, without reloading
+
+            //     };
         </script>
 
     </div>
