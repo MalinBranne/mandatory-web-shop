@@ -493,6 +493,50 @@ function displayCart() {
 
   $(".count-cart").html(shoppingCart.countCart());
   $("#total-cart").html(shoppingCart.totalCart());
+
+  // document.getElementById("myForm").addEventListener("submit", addRequest);
+  $("#validateBtn").on("click", function(event) {
+    event.preventDefault();
+    addRequest(event);
+    console.log("button pressed");
+    cart = [];
+  });
+
+  function addRequest(e) {
+    //event parameter is passed since it is a form.
+    e.preventDefault(); //prevents it from submitting to a file.
+
+    let userName = document.getElementById("fName").value;
+    let userLast = document.getElementById("lName").value;
+    let userEmail = document.getElementById("email").value;
+    let userPhone = document.getElementById("phone").value;
+    let userStreet = document.getElementById("street").value;
+    let userZip = document.getElementById("zip").value;
+    let userCity = document.getElementById("city").value;
+    let userComments = document.getElementById("formComment").value;
+    let userCart = cart[]; //why does cart not go to the server in OrderItems?! When I click console log userCart/cart I see whats inside it.
+
+    fetch("http://demo.edument.se/api/orders", {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify({
+        firstname: userName,
+        lastname: userLast,
+        email: userEmail,
+        phone: userPhone,
+        streetaddress: userStreet,
+        zipcode: userZip,
+        city: userCity,
+        comment: userComments,
+        OrderItems: userCart
+      })
+    })
+      .then(res => res.json())
+      .then(data => console.log(data));
+  }
 }
 
 $("#show-cart").on("click", ".delete-item", function(event) {
@@ -550,124 +594,210 @@ if (sec < 10) {
 today = mm + "/" + dd + "/" + yyyy + "   " + hh + ":" + min + ":" + sec;
 
 /**************************************Skapar individuell produkt div******************************************' */
+/*Fetchin prodicts*/
+fetch("http://demo.edument.se/api/products")
+  .then(response => response.json())
+  .then(data => {
+    var products = data;
+    console.log(products, "hey");
+    renderHTMLtext(products);
+  });
 
-// $(".product >img").click(function(event) {
-//   event.preventDefault();
-//   var id = $(this).attr("data-id");
-//   var prodData;
-//   for (var i = 0; i < products.length; i++) {
-//     if (products[i].id == id) {
-//       prodData = products[i];
-//     }
-//   }
+/*rendering html by looping out the products*/
 
-//   displayProduct(prodData);
-//   switchToPage3();
-// });
+function renderHTMLtext(data) {
+  var HTMLstring = "";
 
-/****displayProduct() renderar html och alla funktioner för att displaya och spara kommentarer och ratings****/
+  let cards = $(".card");
 
-// function displayProduct(prodData) {
-//   var com = [];
-//   if (localStorage.commentData) {
-//     com = JSON.parse(localStorage.commentData);
-//   }
+  for (var i in data) {
+    cards[i].innerHTML = `
+<div class="prodDiv" data-id="${data[i].Id}">
+<img src="${data[i].Image}" />
+<h4>${data[i].Name}</h4>
+<div>Price: ${data[i].Price}</div>
+<div>${data[i].Description}</div>
+</div>
+`;
+  }
+}
 
-//   // var outputproduct = "";
+/*rendering html for specific product when clicking on a div*/
+/*all code for the specific products page, including reviews and such is inside this funcition*/
 
-//   // outputproduct += `<img src="${prodData.image.img}" />
-//   //       <h3>${prodData.name}</h3>
-//   //       <h4>$${prodData.price}</h4>
-//   //       <h4>${prodData.description}</h4>
-//   //       <button class="backBtn btn btn-default roundBtn">Go Back To Products</button>
-//   //       <div id="comments"></div>`;
+//Måste göra fetch igen för att individuell product page ska funka. Hur kan man göra det bättre?
+// Om man bara gör fetch en gång så blir products undefined utanför den fetch funktionen.
 
-//   // $("#display-product").html(outputproduct);
+var prodData;
 
-//   // $(".backBtn").click(function(event) {
-//   //   switchToPage1();
-//   // });
+$(".card").click(function(event) {
+  fetch("http://demo.edument.se/api/products")
+    .then(response => response.json())
+    .then(data => {
+      var products = data;
+      console.log(products, "hey hoooe");
+      event.preventDefault();
 
-//   var renderform = "";
+      var id = $(this).attr("data-id");
+      for (var i = 0; i < products.length; i++) {
+        if (products[i].Id == id) {
+          prodData = products[i];
+        }
+      }
 
-//   renderform += `
-// <div class="stars" id="${prodData.id}">
-// <span data-rating-id="1">&#9733;</span>
-// <span data-rating-id="2">&#9733;</span>
-// <span data-rating-id="3">&#9733;</span>
-// <span data-rating-id="4">&#9733;</span>
-// <span data-rating-id="5">&#9733;</span>
-// </div>
-// <form id="form" action="javascript:void('');" class="add_comment col-xs-12">
-// <label id="namelabel">Name </label>
-// <input id="name" type="string" name="name">
-// <label id="emaillabel">Email </label>
-// <input id="cemail" type="string" name="cemail">
-// <br>
-// <label id="commentlabel">Comment</label>
-// <textarea id="comment" name="comment"></textarea>
-// <br>
-// <button type="submit" class="btn btn-default" id="commentBtn">Comment</button>
-// </form> `;
+      displayProduct(prodData);
+      switchToPage3();
+    });
+});
 
-//   $("#commentsection").html(renderform);
+function displayProduct(prodData) {
+  var com = [];
 
-//   function changeStarRating(rating) {
-//     $(".filled").removeClass("filled");
-//     for (let i = 1; i <= rating; i++) {
-//       stars[i - 1].addClass("filled");
-//     }
-//   }
+  if (localStorage.commentData) {
+    com = JSON.parse(localStorage.commentData);
+  }
+  var outputproduct = "";
 
-//   var rating = $(".stars");
-//   var stars = [
-//     $("[data-rating-id='1']"),
-//     $("[data-rating-id='2']"),
-//     $("[data-rating-id='3']"),
-//     $("[data-rating-id='4']"),
-//     $("[data-rating-id='5']")
-//   ];
+  outputproduct += `  
+<img src="${prodData.Image}" />
+<h3>${prodData.Name}</h3>
+<h4>$${prodData.Price}</h4>
+<h4>${prodData.Description}</h4>
 
-//   rating.on("mouseover", "span", function(e) {
-//     let star = $(e.target);
-//     rating = parseInt(star.attr("data-rating-id"));
-//     changeStarRating(rating);
-//   });
+<a href="${prodData.Url}">${prodData.Url}</a> 
+<br>
+<button class="backBtn btn btn-default roundBtn">Go Back To Products</button>
+<div id="comments"></div>
+`;
 
-// function render(data) {
-//   var review = `<div id="commentbox" data-id="${prodData.id}">
-//     <div class="displayStars">${data.rating} <span>&#9733;</span>
-//     </div>
-//         <h5 id ="commentname">${data.name} | ${data.email}</h5>
-//         <h4 id ="commentpost">${data.comment} </h4>
-//         <p id="date">${data.date}</p>
-//         </div>
-//     `;
+  $("#display-product").html(outputproduct);
 
-//   $("#comments").append(review);
-// }
+  $(".backBtn").click(function(event) {
+    switchToPage1();
+  });
 
-// for (var i = 0; i < com.length; i++) {
-//   if (com[i].id === prodData.id) {
-//     render(com[i]);
-//   }
-// }
+  var renderform = "";
 
-// $("#commentBtn").click(function() {
-//   setTimeout(function() {
-//     form.reset();
-//   }, 1000);
+  renderform += `
+<div class="stars" id="${prodData.id}">
+<span data-rating-id="1">&#9733;</span>
+<span data-rating-id="2">&#9733;</span>
+<span data-rating-id="3">&#9733;</span>
+<span data-rating-id="4">&#9733;</span>
+<span data-rating-id="5">&#9733;</span>
+</div>
+<form id="form" action="javascript:void('');" class="add_comment col-xs-12">
+<label id="namelabel">Name </label>
+<input id="name" type="string" name="name">
+<label id="emaillabel">Email </label>
+<input id="cemail" type="string" name="cemail">
+<br>
+<label id="commentlabel">Comment</label>
+<textarea id="comment" name="comment"></textarea>
+<br>
+<button type="submit" class="btn btn-default" id="commentBtn">Comment</button>
+</form> `;
 
-//   var addCom = {
-//     name: $("#name").val(),
-//     email: $("#cemail").val(),
-//     comment: $("#comment").val(),
-//     date: today,
-//     id: prodData.id,
-//     rating: rating
-//   };
-//   com.push(addCom);
-//   localStorage.commentData = JSON.stringify(com);
-//   render(addCom);
-// });
-// }
+  $("#commentsection").html(renderform);
+
+  function changeStarRating(Rating) {
+    $(".filled").removeClass("filled");
+    for (let i = 1; i <= Rating; i++) {
+      stars[i - 1].addClass("filled");
+    }
+  }
+
+  var Rating = $(".stars");
+  var stars = [
+    $("[data-rating-id='1']"),
+    $("[data-rating-id='2']"),
+    $("[data-rating-id='3']"),
+    $("[data-rating-id='4']"),
+    $("[data-rating-id='5']")
+  ];
+
+  Rating.on("mouseover", "span", function(e) {
+    let star = $(e.target);
+    Rating = parseInt(star.attr("data-rating-id"));
+    changeStarRating(Rating);
+  });
+
+  /***************Del 3 Nedan***********/
+
+  fetch("https://demo.edument.se/api/reviews")
+    .then(response => response.json())
+    .then(reviews => {
+      com = reviews;
+      var idRev = $(this).attr("data-id");
+      for (var i = 0; i < com.length; i++) {
+        if (com[i].Id == idRev) {
+          prodData = com[i];
+        }
+      }
+      renderReviews(prodData.Id);
+    })
+    .catch(err => console.log(err));
+
+  /*function above loops out reviews on correct product*/
+
+  /*Render reviews html*/
+
+  function renderReviews(prodData) {
+    reviewWrapper = $("#comments");
+
+    const reviews = com.filter(review => review.ProductID === prodData);
+
+    reviews.map(review => {
+      reviewWrapper.append(
+        `<div id="commentbox" data-id="${review.Id}">
+         <div class="displayStars">${review.Rating} <span>&#9733;</span>
+         </div>
+             <h5 id ="commentname">${review.Name} | ${review.Email}</h5>
+             <h4 id ="commentpost">${review.Comment} </h4>
+            
+             </div>
+         `
+      );
+    });
+  }
+
+  /*posting review to the api*/
+
+  function postReview(review) {
+    return fetch("https://demo.edument.se/api/reviews", {
+      method: "POST",
+      body: JSON.stringify(review),
+      headers: new Headers({
+        "Content-Type": "application/json"
+      })
+    });
+  }
+
+  /*adding new review by creating new review object by collecting values from my comment form*/
+  function addReview(prodData) {
+    const newReview = {
+      ProductID: prodData.Id,
+      Name: $("#name").val(),
+      Email: $("#cemail").val(),
+      Comment: $("#comment").val(),
+      Rating: Rating
+    };
+
+    postReview(newReview); // post review to api
+    com.push(newReview); //push new review to the list of reviews
+
+    renderReviews(prodData.Id); // display new review on the page
+  }
+
+  /* adding review when clicking on comment button*/
+  $("#commentBtn").click(function() {
+    setTimeout(function() {
+      form.reset();
+    }, 1000);
+
+    console.log("btn pressed");
+
+    addReview(prodData);
+    console.log(com);
+  });
+}
