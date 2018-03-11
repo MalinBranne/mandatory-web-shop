@@ -181,6 +181,9 @@
 
                 var com = [];
 
+
+
+
                 if (localStorage.commentData) {
                     com = JSON.parse(localStorage.commentData);
                 }
@@ -253,18 +256,21 @@
                 });
 
 
-                /***************Del 2 Nedan***********/
+                /***************Del 3 Nedan***********/
 
                 fetch('https://demo.edument.se/api/reviews')
                     .then(response => response.json())
                     .then(reviews => {
                         com = reviews;
+                        var idRev = $(this).attr("data-id");
+                        for (var i = 0; i < com.length; i++) {
+                            if (com[i].Id == idRev) {
+                                prodData = com[i]
+                            }
+                        }
+                        renderReviews(prodData.Id);
                     })
                     .catch(err => console.log(err));
-                //this is where shopping cart, products and reviews are "saved"
-
-
-
 
 
 
@@ -304,17 +310,7 @@
 
 
 
-                $("#commentBtn").click(function () {
-                    setTimeout(function () {
-                        form.reset();
-                    }, 1000);
-
-                    console.log("btn pressed");
-
-                    addReview(prodData);
-                    console.log(com);
-
-                });
+                renderReviews(prodData.Id);
 
                 function addReview(prodData) {
                     const newReview = {
@@ -326,17 +322,27 @@
                         Rating: Rating
                     };
 
-
                     postReview(newReview);
                     com.push(newReview); //this is to make the new review
-                    renderReviews(prodData.Id); //måste ha.Id
 
+                    renderReviews(prodData.Id);
                 }
 
-                renderReviews(prodData.Id);
+
                 //två första .Id funkar. typ. reviews displays när man submittar en ny review.
 
 
+                $("#commentBtn").click(function () {
+                    setTimeout(function () {
+                        form.reset();
+                    }, 1000);
+
+                    console.log("btn pressed");
+
+                    addReview(prodData);
+                    console.log(com);
+
+                });
             }
         </script>
 
