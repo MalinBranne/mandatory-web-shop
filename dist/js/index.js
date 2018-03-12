@@ -3,133 +3,9 @@ $("#productsDiv").attr("style", "display: block");
 $("#checkoutDiv").attr("style", "display: none");
 $("#productPage").attr("style", "display: none");
 
-/******************************************produkt lista***********************************************' */
-// let products = [
-//   {
-//     id: "id0",
-//     name: "Bikini Top",
-//     price: 500,
-//     description: "Lorem ipsum dolor sit amet, consectetur elit",
-//     image: {
-//       img: "dist/img/b1.jpg"
-//     }
-//   },
-
-//   {
-//     id: "id1",
-//     name: "Bikini Bottom",
-//     price: 500,
-//     description: "Lorem ipsum dolor sit amet, consectetur elit",
-//     image: {
-//       img: "dist/img/b4.jpg"
-//     }
-//   },
-//   {
-//     id: "id2",
-//     name: "Bikini Full Set",
-//     price: 500,
-//     description: "Lorem ipsum dolor sit amet, consectetur elit",
-//     image: {
-//       img: "dist/img/b2.jpg"
-//     }
-//   },
-
-//   {
-//     id: "id3",
-//     name: "Bikini Set",
-//     price: 500,
-//     description: "Lorem ipsum dolor sit amet, consectetur elit",
-//     image: {
-//       img: "dist/img/b3.jpg"
-//     }
-//   },
-//   {
-//     id: "id4",
-//     name: "Bikini Top Blue",
-//     price: 500,
-//     description: "Lorem ipsum dolor sit amet, consectetur elit",
-//     image: {
-//       img: "dist/img/b4.jpg"
-//     }
-//   },
-
-//   {
-//     id: "id5",
-//     name: "Bikini Bottom Blue",
-//     price: 500,
-//     description: "Lorem ipsum dolor sit amet, consectetur elit",
-//     image: {
-//       img: "dist/img/b1.jpg"
-//     }
-//   },
-//   {
-//     id: "id6",
-//     name: "Bikini Full Set Blue",
-//     price: 500,
-//     description: "Lorem ipsum dolor sit amet, consectetur elit",
-//     image: {
-//       img: "dist/img/b2.jpg"
-//     }
-//   },
-
-//   {
-//     id: "id7",
-//     name: "Bikini Set Blue",
-//     price: 500,
-//     description: "Lorem ipsum dolor sit amet, consectetur elit",
-//     image: {
-//       img: "dist/img/b3.jpg"
-//     }
-//   },
-//   {
-//     id: "id8",
-//     name: "Bikini Set White",
-//     price: 500,
-//     description: "Lorem ipsum dolor sit amet, consectetur elit",
-//     image: {
-//       img: "dist/img/b4.jpg"
-//     }
-//   },
-//   {
-//     id: "id9",
-//     name: "Bikini Set Gold",
-//     price: 500,
-//     description: "Lorem ipsum dolor sit amet, consectetur elit",
-//     image: {
-//       img: "dist/img/b1.jpg"
-//     }
-//   }
-// ];
-
-// // array av objekt som innehåller produkter
-
-// $("#myImage").attr("src", products[0].image.img);
-// $("#myImage1").attr("src", products[1].image.img);
-// $("#myImage2").attr("src", products[2].image.img);
-// $("#myImage3").attr("src", products[3].image.img);
-// $("#myImage4").attr("src", products[4].image.img);
-// $("#myImage5").attr("src", products[5].image.img);
-// $("#myImage6").attr("src", products[6].image.img);
-// $("#myImage7").attr("src", products[7].image.img);
-// $("#myImage8").attr("src", products[8].image.img);
-// $("#myImage9").attr("src", products[9].image.img);
-
-//loopar ut bilderna från arrayen i img taggarna
-// $(() =>{
-
-// });
 let cards = $("div > #card");
 
-// for (var i in products) {
-//   let p = products[i];
-//   cards[i].innerHTML = `
-//     <h4>${p.name}</h4>
-//     <div>Price: ${p.price}</div>
-//     <div>${p.description}</div>
-//   `;
-// }
 
-//loopar ut objekten ur arrayen i divvarna.
 
 /******************************************funktioner för att byta vy***********************************************' */
 
@@ -264,8 +140,7 @@ function validateCity() {
 }
 
 function validateForm() {
-  if (
-    !validateName() ||
+  if (!validateName() ||
     !validateEmail() ||
     !validatePhone() ||
     !validateStreet() ||
@@ -278,13 +153,13 @@ function validateForm() {
       "formPrompt",
       "grey"
     );
-    setTimeout(function() {
+    setTimeout(function () {
       jsHide("formPrompt");
     }, 10000);
   } else {
     jsShow("formPrompt");
     producePrompt("Form Sent", "formPrompt", "green");
-    setTimeout(function() {
+    setTimeout(function () {
       jsHide("namePrompt");
       jsHide("emailPrompt");
       jsHide("phonePrompt");
@@ -312,7 +187,7 @@ function producePrompt(message, promptLocation, color) {
   document.getElementById(promptLocation).style.color = color;
 }
 
-$("#validateBtn").on("click", function(event) {
+$("#validateBtn").on("click", function (event) {
   validateForm();
   cart = [];
 });
@@ -320,10 +195,11 @@ $("#validateBtn").on("click", function(event) {
 
 /******************************************Shopping cart functions***********************************************' */
 
-var shoppingCart = (function() {
+var shoppingCart = (function () {
   var cart = [];
 
-  function Item(name, price, count) {
+  function Item(id, name, price, count) {
+    this.id = id;
     this.name = name;
     this.price = price;
     this.count = count;
@@ -344,7 +220,7 @@ var shoppingCart = (function() {
 
   var obj = {};
 
-  obj.addItemToCart = function(name, price, count) {
+  obj.addItemToCart = function (id, name, price, count) {
     for (var i in cart) {
       if (cart[i].name === name) {
         cart[i].count += count;
@@ -353,14 +229,14 @@ var shoppingCart = (function() {
       }
     }
 
-    console.log("addItemToCart:", name, price, count);
+    console.log("addItemToCart:", id, name, price, count);
 
-    var item = new Item(name, price, count);
+    var item = new Item(id, name, price, count);
     cart.push(item);
     saveCart();
   };
 
-  obj.setCountForItem = function(name, count) {
+  obj.setCountForItem = function (name, count) {
     for (var i in cart) {
       if (cart[i].name === name) {
         cart[i].count = count;
@@ -370,7 +246,7 @@ var shoppingCart = (function() {
     saveCart();
   };
 
-  obj.removeItemFromCart = function(name) {
+  obj.removeItemFromCart = function (name) {
     for (var i in cart) {
       if (cart[i].name === name) {
         cart[i].count--;
@@ -383,7 +259,7 @@ var shoppingCart = (function() {
     saveCart();
   };
 
-  obj.removeItemFromCartAll = function(name) {
+  obj.removeItemFromCartAll = function (name) {
     for (var i in cart) {
       if (cart[i].name === name) {
         cart.splice(i, 1);
@@ -393,12 +269,12 @@ var shoppingCart = (function() {
     saveCart();
   };
 
-  obj.clearCart = function() {
+  obj.clearCart = function () {
     cart = [];
     saveCart();
   };
 
-  obj.countCart = function() {
+  obj.countCart = function () {
     var totalCount = 0;
     for (var i in cart) {
       totalCount += cart[i].count;
@@ -407,7 +283,7 @@ var shoppingCart = (function() {
     return totalCount;
   };
 
-  obj.totalCart = function() {
+  obj.totalCart = function () {
     var totalCost = 0;
     for (var i in cart) {
       totalCost += cart[i].price * cart[i].count;
@@ -415,7 +291,7 @@ var shoppingCart = (function() {
     return totalCost.toFixed(2);
   };
 
-  obj.listCart = function() {
+  obj.listCart = function () {
     var cartCopy = [];
     console.log("Listing cart");
     console.log(cart);
@@ -437,16 +313,17 @@ var shoppingCart = (function() {
 
 /****************************************** Bygger cart***********************************************' */
 
-$(".add-to-cart").on("click", function(event) {
+$(".add-to-cart").on("click", function (event) {
   event.preventDefault();
+  var id = Number($(this).attr("data-id"));
   var name = $(this).attr("data-name");
   var price = Number($(this).attr("data-price"));
 
-  shoppingCart.addItemToCart(name, price, 1);
+  shoppingCart.addItemToCart(id, name, price, 1);
   displayCart();
 });
 
-$("#clear-cart").on("click", function(event) {
+$("#clear-cart").on("click", function (event) {
   shoppingCart.clearCart();
   displayCart();
 });
@@ -494,18 +371,37 @@ function displayCart() {
   $(".count-cart").html(shoppingCart.countCart());
   $("#total-cart").html(shoppingCart.totalCart());
 
-  // document.getElementById("myForm").addEventListener("submit", addRequest);
-  $("#validateBtn").on("click", function(event) {
+
+  /*****************Inlämning 4 Order using fetch********************** */
+  /* för varje item generera så många object i orderItemsListan 
+  för en ny lista utifrån cart som innehåller id name price count*/
+
+  $("#validateBtn").on("click", function (event) {
     event.preventDefault();
     addRequest(event);
     console.log("button pressed");
-    cart = [];
+
   });
+
 
   function addRequest(e) {
     //event parameter is passed since it is a form.
     e.preventDefault(); //prevents it from submitting to a file.
 
+
+    let orderItems = [];
+    let cart = shoppingCart.listCart();
+    console.log(cart);
+    cart.forEach(item => {
+      for (let i = 0; i < item.count; i++) {
+        orderItems.push({
+          Id: item.id,
+          Name: item.name,
+          Price: item.price
+        })
+      }
+    });
+    console.log(orderItems);
     let userName = document.getElementById("fName").value;
     let userLast = document.getElementById("lName").value;
     let userEmail = document.getElementById("email").value;
@@ -514,50 +410,55 @@ function displayCart() {
     let userZip = document.getElementById("zip").value;
     let userCity = document.getElementById("city").value;
     let userComments = document.getElementById("formComment").value;
-    let userCart = cart[]; //why does cart not go to the server in OrderItems?! When I click console log userCart/cart I see whats inside it.
+    let userCart = orderItems; //why does cart not go to the server in OrderItems?! When I click console log userCart/cart I see whats inside it.
+
+
+
 
     fetch("http://demo.edument.se/api/orders", {
-      method: "POST",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify({
-        firstname: userName,
-        lastname: userLast,
-        email: userEmail,
-        phone: userPhone,
-        streetaddress: userStreet,
-        zipcode: userZip,
-        city: userCity,
-        comment: userComments,
-        OrderItems: userCart
+        method: "POST",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify({
+          firstname: userName,
+          lastname: userLast,
+          email: userEmail,
+          phone: userPhone,
+          streetaddress: userStreet,
+          zipcode: userZip,
+          city: userCity,
+          comment: userComments,
+          OrderItems: orderItems
+        })
       })
-    })
       .then(res => res.json())
       .then(data => console.log(data));
   }
 }
 
-$("#show-cart").on("click", ".delete-item", function(event) {
+/************************************************** */
+
+$("#show-cart").on("click", ".delete-item", function (event) {
   var name = $(this).attr("data-name");
   shoppingCart.removeItemFromCartAll(name);
   displayCart();
 });
 
-$("#show-cart").on("click", ".subtract-item", function(event) {
+$("#show-cart").on("click", ".subtract-item", function (event) {
   var name = $(this).attr("data-name");
   shoppingCart.removeItemFromCart(name);
   displayCart();
 });
 
-$("#show-cart").on("click", ".plus-item", function(event) {
+$("#show-cart").on("click", ".plus-item", function (event) {
   var name = $(this).attr("data-name");
   shoppingCart.addItemToCart(name, 0, 1);
   displayCart();
 });
 
-$("#show-cart").on("change", ".item-count", function(event) {
+$("#show-cart").on("change", ".item-count", function (event) {
   var name = $(this).attr("data-name");
   var count = Number($(this).val());
   shoppingCart.setCountForItem(name, count);
@@ -630,7 +531,7 @@ function renderHTMLtext(data) {
 
 var prodData;
 
-$(".card").click(function(event) {
+$(".card").click(function (event) {
   fetch("http://demo.edument.se/api/products")
     .then(response => response.json())
     .then(data => {
@@ -672,7 +573,7 @@ function displayProduct(prodData) {
 
   $("#display-product").html(outputproduct);
 
-  $(".backBtn").click(function(event) {
+  $(".backBtn").click(function (event) {
     switchToPage1();
   });
 
@@ -716,7 +617,7 @@ function displayProduct(prodData) {
     $("[data-rating-id='5']")
   ];
 
-  Rating.on("mouseover", "span", function(e) {
+  Rating.on("mouseover", "span", function (e) {
     let star = $(e.target);
     Rating = parseInt(star.attr("data-rating-id"));
     changeStarRating(Rating);
@@ -790,8 +691,8 @@ function displayProduct(prodData) {
   }
 
   /* adding review when clicking on comment button*/
-  $("#commentBtn").click(function() {
-    setTimeout(function() {
+  $("#commentBtn").click(function () {
+    setTimeout(function () {
       form.reset();
     }, 1000);
 
